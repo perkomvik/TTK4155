@@ -21,20 +21,19 @@ int main(void){
 	//printf("hei\n");
 	DAC_init();
 	motor_init();
-	//PID_init();
+	PID_init();
     CAN_init(MODE_NORMAL);
 	servo_init(F_CPU);
 	IR_init();
 	solenoid_init();
 	CAN_message msg;
-	while(1)
-    {	
+	while(1){	
+		
 		if(CAN_receive(&msg)){
-			CAN_print(&msg);
+			//CAN_print(&msg);
 			if (msg.id==PONG_START){
-				PlayPong(msg.data[0]);
+				pong_play(msg.data[0]);
 			}
 		}
-		
     }
 }

@@ -37,7 +37,7 @@ int main(void){
 						pong_play(JOY);
 						break;
 					case(LINE_4):
-						//PlayPong2(SLIDER);
+						pong_play(SLIDER);
 						break;
 					case(LINE_5):
 						pong_print_highscore();

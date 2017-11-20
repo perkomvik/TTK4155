@@ -16,12 +16,17 @@
 #include "DAC.h"
 #include "Motor.h"
 #include "solenoid.h"
+#include "PID.h"
+
+typedef enum tag_game_mode{
+	JOY = 0,
+	SLIDER = 1
+}game_mode;
 
 
-
-void PlayPong(uint8_t mode);
-void Pong_slider(void);
-void Pong_joy(void);
+void pong_play(game_mode mode);
+void pong_slider(void);
+void pong_JOY(void);
 
 
 #endif /* PONG_H_ */

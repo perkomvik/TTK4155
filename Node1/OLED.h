@@ -47,6 +47,7 @@ void OLED_store_sym(char symbol);
 void OLED_store_str(char* string);
 void OLED_print(void);
 void OLED_refresh(void);
+void OLED_store_menu(char* string);
 uint8_t get_cursor(void);
 
 

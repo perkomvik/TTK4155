@@ -26,7 +26,7 @@ void motor_init(){
 	//--------------------Set encoder pins to output and input mode----------------------
 	
 	// Output Enable pin (active low): !OE
-	set_bit(DDRH, PH5);
+	set_bit(DDRB, PB5);
 	
 	//Selection pin: SEL
 	set_bit(DDRH, PH3);
@@ -95,8 +95,8 @@ int16_t motor_read_rotation(uint8_t reset_flag){
 	 |  We don't know why, perhaps faulty motor box?   |
 	 *-------------------------------------------------*/
 	
-	//Set !OE low to enable output of encoder
-	clear_bit(PORTH, PH5);
+	//Set !OE low to enable output of encoder jumps PH5
+	clear_bit(PORTB, PB5);
 	
 	//Set SEL high to get low byte
 	set_bit(PORTH, PH3);
@@ -122,7 +122,7 @@ int16_t motor_read_rotation(uint8_t reset_flag){
 		motor_reset_encoder();
 	}
 	//Set !OE high to disable output of encoder
-	set_bit(PORTH, PH5);
+	set_bit(PORTB, PB5);
 	
 	int16_t rot = (int16_t) ( (high << 8) | low);
 	
@@ -132,17 +132,19 @@ int16_t motor_read_rotation(uint8_t reset_flag){
 void motor_calibrate() {
 	motor_set_direction(21);
 	motor_set_speed(0);
-	int16_t cur_rot = motor_read_rotation(0);
+	int16_t cur_rot = motor_read_rotation(1);
 	int16_t prev_rot = cur_rot+200;
 	while(prev_rot != cur_rot) {
+		printf("Encoder prev: %d\t",prev_rot);
 		prev_rot = cur_rot;
 		_delay_ms(40);
 		cur_rot = motor_read_rotation(0);
+		
+		printf("Encoder cur: %d\n",prev_rot);
 	}
 	motor_set_speed(126);
 	_delay_ms(500);
 	motor_reset_encoder();
-	printf("hei\n");
 	
 	
 }
@@ -161,3 +163,6 @@ void motor_move(int16_t diff_rot, uint8_t power) {
 	}
 }
 
+motor_encoder_test(void){
+	printf("Encoder: %d\n", motor_read_rotation(0));
+}

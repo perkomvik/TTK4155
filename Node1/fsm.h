@@ -28,10 +28,7 @@ typedef enum tag_fsm_state {
 	STATE_THANKS_TO = 3
 } fsm_state;
 
-typedef enum tag_game_mode{
-	JOY = 0,
-	SLIDER = 1
-}game_mode;
+
 
 static uint8_t currentState;
 

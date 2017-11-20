@@ -26,28 +26,28 @@ void fsm_evInit(void){
 
 void fsm_evMainMenu(void){
 	OLED_clear();
-	OLED_store_str(MAIN_MENU);
+	OLED_store_menu(MAIN_MENU);
 	OLED_refresh();
 	currentState = STATE_MAIN_MENU;
 }
 
 void fsm_evPong(void){
 	OLED_clear();
-	OLED_store_str(PONG_MENU);
+	OLED_store_menu(PONG_MENU);
 	OLED_refresh();
 	currentState = STATE_PONG;
 }
 
 void fsm_evSnek(void){
 	OLED_clear();
-	OLED_store_str(SNEK_MENU);
+	OLED_store_menu(SNEK_MENU);
 	OLED_refresh();
 	currentState = STATE_SNEK;
 }
 
 void fsm_evThanksTo(void){
 	OLED_clear();
-	OLED_store_str(THANKS_TO_MENU);
+	OLED_store_menu(THANKS_TO_MENU);
 	OLED_refresh();
 	currentState = STATE_THANKS_TO;
 }

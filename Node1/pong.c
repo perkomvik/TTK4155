@@ -31,13 +31,13 @@ void pong_update_score(uint8_t score){
 	OLED_clear_line(5);
 	OLED_goto_line(5);
 	char myScore[16];
-	sprintf(myScore, "Your Score: %d", score);
+	sprintf(myScore, " Your score: %d", score);
 	OLED_store_str(myScore);
 	OLED_refresh();
 }
 void pong_init(game_mode mode){
 	OLED_clear();
-	OLED_store_str(PLAYING_PONG_MENU);
+	OLED_store_menu(PLAYING_PONG_MENU);
 	OLED_refresh();
 	
 	//send game mode instruction to node 2
@@ -67,18 +67,24 @@ void pong_JOY(void){
 	CAN_msg results;
 	uint8_t game_over = 0;
 	uint8_t score = 0;
+	
+	
 	while (!game_over){
 		
 		if(CAN_receive(&results)){
+			CAN_print(&results);
+			if(results.data[0]){
+				break;
+			}
 			send_all_joy(PONG_INSTR); //kan være problematisk å sende dette hvis spillet egt er ferdig
 			
 			if(results.data[1]){
 				score++;
 				pong_update_score(score);
 			}
-			if(results.data[0]){
-				game_over = 1;
-			}
+			//if(results.data[0]){
+				//game_over = 1;
+			//}
 		}
 	}
 	fsm_evPong();
@@ -94,15 +100,19 @@ void pong_slider(void){
 	while (!game_over){
 		
 		if(CAN_receive(&results)){
+			CAN_print(&results);
+			if(results.data[0]){
+				break;
+			}
 			send_all_slider(PONG_INSTR); //kan være problematisk å sende dette hvis spillet egt er ferdig
 			
 			if(results.data[1]){
 				score++;
 				pong_update_score(score);
 			}
-			if(results.data[0]){
-				game_over = 1;
-			}
+			//if(results.data[0]){
+				//game_over = 1;
+			//}
 		}
 	}
 	
@@ -110,7 +120,7 @@ void pong_slider(void){
 }
 
 void pong_print_highscore(void){
-	OLED_store_str(HIGHSCORES_MENU);
+	OLED_store_menu(HIGHSCORES_MENU);
 	char str_num[3];
 	
 	for (uint8_t i = 0; i < 6; i++){
@@ -140,7 +150,7 @@ void pong_update_highscore(uint8_t score){
 }
 
 void pong_get_highscore_line(uint8_t score, uint8_t lineNum){
-	OLED_store_str(CONGRATULATIONS_MENU);
+	OLED_store_menu(CONGRATULATIONS_MENU);
 	OLED_refresh();
 	_delay_ms(1000);
 	char name[10];

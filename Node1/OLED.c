@@ -161,3 +161,23 @@ void OLED_print(void){
 	OLED_home();
 }
 
+
+void OLED_store_menu(char* string){
+	cursor = 0;
+	uint8_t str_index = 0;
+	uint8_t volatile* sram_pointer;
+	while (string[str_index] != '\0'){
+		if (cursor < N_OLED_BYTES){
+			sram_pointer = (uint8_t *)(SRAM_MEM_ADR + cursor);
+			if(string[str_index] == '¤'){
+				printf("clear line: %d\n",cursor/N_OLED_LINE_BYTES);
+				OLED_clear_line(cursor/N_OLED_LINE_BYTES);
+				str_index++;
+			}else{
+				*sram_pointer = string[str_index];
+				str_index++;
+				cursor++;
+			}	
+		}
+	}
+}

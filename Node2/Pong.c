@@ -6,28 +6,20 @@
  */ 
 #include "Pong.h"
 
-
-typedef enum tag_game_mode{
-	JOY = 0,
-	SLIDER = 1
-}game_mode;
-
-
-
-void PlayPong(uint8_t mode){
+void pong_play(game_mode mode){
 	switch(mode){
 		case(JOY):
-			Pong_joy();
+			pong_JOY();
 			break;
 		case(SLIDER):
-			Pong_slider();
+			pong_slider();
 			break;
 		default:
 			break;
 	}
 }
 
-void Pong_joy(void){
+void pong_JOY(void){
 	uint8_t game_over = 0;
 	CAN_message instructions;
 	CAN_message results;
@@ -50,22 +42,24 @@ void Pong_joy(void){
 			//set_servo(instructions.data[1]);
 			set_servo(127);
 			solenoid_fire(instructions.data[2]);
-			_delay_ms(10);
+			_delay_ms(10); // Needed for solenoid disturbance
 			CAN_message_send(&results);
 		}
+		
 		game_over = is_game_over();
 	}
 	results.data[0] = game_over;
+	CAN_print(&results);
 	CAN_message_send(&results);
 }
 
 
 
-void Pong_slider(void){
-	int8_t game_over = 0;
+void pong_slider(void){
+	uint8_t game_over = 0;
 	CAN_message instructions;
 	CAN_message results;
-	results.id = 2;
+	results.id = PONG_RESULT;
 	results.length = 2;
 	results.data[0] = 0;
 	results.data[1] = 0;
@@ -79,17 +73,22 @@ void Pong_slider(void){
 	while(!game_over){
 		results.data[1] = is_goal();
 		if(CAN_receive(&instructions)){
-			PID_update_pos_ref(results.data[1]);
+			//CAN_print(&instructions);
+			PID_update_pos_ref(instructions.data[1]);
 			PID();
-			//set_servo(instructions.data[1]);
-			set_servo(127);
+			set_servo(instructions.data[1]);
+			//printf("results.data[0]: %d\n", results.data[0]);
+			set_servo(instructions.data[0]);
 			solenoid_fire(instructions.data[2]);
 			_delay_ms(10);
 			CAN_message_send(&results);
 		}
 		game_over = is_game_over();
 	}
+	
 	results.data[0] = game_over;
+	motor_set_speed(127);
+	CAN_print(&results);
 	CAN_message_send(&results);
 }
 ////CAN_print(&msg);

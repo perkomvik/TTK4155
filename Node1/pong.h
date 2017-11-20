@@ -8,8 +8,12 @@
 
 #ifndef PONG_H_
 #define PONG_H_
-#include "Utilities.h"
-typedef enum tag_game_mode game_mode; //??
+#include "utilities.h"
+
+typedef enum tag_game_mode{
+	JOY = 0,
+	SLIDER = 1
+}game_mode; //??
 
 void pong_init(game_mode mode);
 void pong_play(game_mode mode);

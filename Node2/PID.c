@@ -24,7 +24,7 @@ int16_t ref_position = 0;
 //double motor_middle = 0;
 double Kp = 1;
 double Ki = 0.5;
-double Kd = 2;
+double Kd = 0.03;
 double integral = 0;
 int16_t prev_error = 0;
 double dt = 0.016;
@@ -37,23 +37,23 @@ void PID(void){
 	if (timer_flag){
 		clear_bit(TIMSK2,TOIE2);
 		int16_t motor_rot = motor_read_rotation(0);
-		printf("Encoder: %d\t", motor_rot);
+		//printf("Encoder: %d\t", motor_rot);
 		double measured = (double)((motor_rot - rot_min)/(double)(rot_max))*255;
-		printf("Malt: %d\t", (uint16_t)measured);
+		//printf("Malt: %d\t", (uint16_t)measured);
 		//double measured = (motor_rot + motor_middle) / (-motor_middle/100);
 		//(double)((read_value - enc_min)/(double)(enc_max))*255;
 		int16_t ref = ref_position;
-		if(ref >222){
-			ref = 222;
-		} else if(ref<30){
-			ref = 30;
+		if(ref >240){
+			ref = 240;
+		} else if(ref<10){
+			ref = 10;
 		}
 		
 	
 	
 		int16_t error = ref - (int)measured;
 		integral = integral + error * dt;
-		printf("Error: %d\t", error);
+		//printf("Error: %d\t", error);
 		if (error < 1){
 			integral = 0;
 		}
@@ -74,7 +74,7 @@ void PID(void){
 			motor_set_direction(140);
 				power = power_signed;
 		}
-	printf("True power: %d\n", power);
+	//printf("True power: %d\n", power);
 	motor_set_speed_2(power);
 	}
 	timer_flag = 0;
