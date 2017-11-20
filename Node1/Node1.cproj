@@ -207,6 +207,12 @@
     <Compile Include="fonts.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="fsm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="fsm.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="joystick.c">
       <SubType>compile</SubType>
     </Compile>
@@ -222,19 +228,13 @@
     <Compile Include="MCP2515.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Memory.c">
+    <Compile Include="memory.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Memory.h">
+    <Compile Include="memory.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="fsm.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="fsm.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Menus.h">
+    <Compile Include="menus.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="OLED.c">
@@ -243,10 +243,10 @@
     <Compile Include="OLED.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Pong.c">
+    <Compile Include="pong.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Pong.h">
+    <Compile Include="pong.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="SPI.c">
@@ -255,16 +255,22 @@
     <Compile Include="SPI.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Usart_Driver.c">
+    <Compile Include="test.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Usart_Driver.h">
+    <Compile Include="test.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Utilities.c">
+    <Compile Include="USART.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Utilities.h">
+    <Compile Include="USART.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="utilities.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="utilities.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

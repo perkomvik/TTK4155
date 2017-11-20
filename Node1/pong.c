@@ -157,7 +157,7 @@ void pong_get_highscore_line(uint8_t score, uint8_t lineNum){
 	_delay_ms(1000);
 	char name[10];
 	scanf("%s",name); //may overflow
-	char* name2;
+	char* name2 = "heeeeeeeei";
 	sprintf(name2,name);
 	printf("%s \n", name2);
 	pong_place_highscore(name2,score,lineNum);

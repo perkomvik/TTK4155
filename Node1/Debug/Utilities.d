@@ -1,1 +1,1 @@
-Utilities.d Utilities.o: .././Utilities.c
+utilities.d utilities.o: .././utilities.c

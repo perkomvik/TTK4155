@@ -8,23 +8,25 @@ CAN.c
 
 CAN_joystick.c
 
+fsm.c
+
 joystick.c
 
 main.c
 
 MCP2515.c
 
-Memory.c
-
-fsm.c
+memory.c
 
 OLED.c
 
-Pong.c
+pong.c
 
 SPI.c
 
-Usart_Driver.c
+test.c
 
-Utilities.c
+USART.c
+
+utilities.c
 

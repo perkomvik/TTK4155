@@ -12,9 +12,9 @@
 
 #include "utilities.h"
 
-char SPI_Read(void);
-void SPI_Send(char cData);
-void SPI_MasterInit(void);
+char SPI_read(void);
+void SPI_send(char cData);
+void SPI_master_init(void);
 
 
 #endif /* SPI_H_ */

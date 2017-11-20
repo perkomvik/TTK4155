@@ -1,5 +1,5 @@
 MCP2515.d MCP2515.o: .././MCP2515.c .././MCP2515.h .././SPI.h \
- .././Utilities.h \
+ .././utilities.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -24,7 +24,7 @@ MCP2515.d MCP2515.o: .././MCP2515.c .././MCP2515.h .././SPI.h \
 
 .././SPI.h:
 
-.././Utilities.h:
+.././utilities.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h:
 

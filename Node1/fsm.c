@@ -87,7 +87,6 @@ void fsm_evReturn(void){
 		} else if(!JOY_get_button()){
 			last_state_button = 0;
 		}
-		
 	}
 }
 

@@ -1,4 +1,4 @@
-Pong.d Pong.o: .././Pong.c .././Pong.h .././Utilities.h \
+pong.d pong.o: .././pong.c .././pong.h .././Utilities.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -18,11 +18,11 @@ Pong.d Pong.o: .././Pong.c .././Pong.h .././Utilities.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdlib.h \
- .././CAN_joystick.h .././joystick.h .././CAN.h .././MCP2515.h .././SPI.h \
- .././OLED.h .././fsm.h .././Usart_Driver.h .././Memory.h .././ADC.h \
- .././Menus.h
+ .././CAN_joystick.h .././joystick.h .././utilities.h .././CAN.h \
+ .././MCP2515.h .././SPI.h .././OLED.h .././fsm.h .././USART.h \
+ .././memory.h .././ADC.h .././menus.h
 
-.././Pong.h:
+.././pong.h:
 
 .././Utilities.h:
 
@@ -68,6 +68,8 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 .././joystick.h:
 
+.././utilities.h:
+
 .././CAN.h:
 
 .././MCP2515.h:
@@ -78,10 +80,10 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 .././fsm.h:
 
-.././Usart_Driver.h:
+.././USART.h:
 
-.././Memory.h:
+.././memory.h:
 
 .././ADC.h:
 
-.././Menus.h:
+.././menus.h:

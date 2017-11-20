@@ -19,7 +19,7 @@ CAN_joystick.d CAN_joystick.o: .././CAN_joystick.c .././CAN_joystick.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdlib.h \
- .././joystick.h .././CAN.h .././MCP2515.h .././SPI.h
+ .././joystick.h .././utilities.h .././CAN.h .././MCP2515.h .././SPI.h
 
 .././CAN_joystick.h:
 
@@ -64,6 +64,8 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdlib.h:
 
 .././joystick.h:
+
+.././utilities.h:
 
 .././CAN.h:
 

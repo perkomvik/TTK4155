@@ -7,8 +7,8 @@ void mcp2515_write(uint8_t address, uint8_t cData);
 void mcp2515_set_mode(uint8_t mode);
 void mcp2515_request_to_send(uint8_t buffer); // use 0x81 MCP_RTS_TX0
 void mcp2515_bit_modify(uint8_t regist, uint8_t mask, uint8_t cData);
-void mcp2515_reset();
-uint8_t mcp2515_read_status();
+void mcp2515_reset(void);
+uint8_t mcp2515_read_status(void);
 uint8_t mcp2515_init(uint8_t mode);
 
 /*
