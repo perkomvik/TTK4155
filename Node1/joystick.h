@@ -14,7 +14,8 @@
 typedef enum tag_JOY_dir_y{
 	UP = -1,
 	MIDDLE = 0,
-	DOWN = 1
+	DOWN = 1,
+	UNDEFINED = 2
 }JOY_dir_y;
 
 void JOY_init(void);

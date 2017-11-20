@@ -15,7 +15,7 @@
 	" Return         "
 
 #define SNEK_MENU \
-	" SNEK_MENU      "\
+	"	SNEK MENU    "\
 	"                "\
 	">Play game      "\
 	" Return         "

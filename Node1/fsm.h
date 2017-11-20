@@ -41,7 +41,7 @@ void fsm_evPong(void);
 void fsm_evSnek(void);
 void fsm_evThanksTo(void);
 void fsm_evMenu4(void);
-OLED_line fsm_MenuNavigate(OLED_line max_line);
+OLED_line fsm_menuNavigate(OLED_line max_line);
 
 fsm_state fsm_getCurrentState(void);
 void fsm_evReturn(void);

@@ -52,7 +52,7 @@ void fsm_evThanksTo(void){
 	currentState = STATE_THANKS_TO;
 }
 
-OLED_line fsm_MenuNavigate(OLED_line max_line){
+OLED_line fsm_menuNavigate(OLED_line max_line){
 	int last_dir_y = 0;
 	int dir_y;
 	int state_button;
@@ -60,7 +60,7 @@ OLED_line fsm_MenuNavigate(OLED_line max_line){
 	int last_state_button = 1;
 	while(1){
 		dir_y = JOY_get_dir_y();
-		if (last_dir_y == MIDDLE && dir_y != MIDDLE){
+		if (last_dir_y == MIDDLE && dir_y != MIDDLE && dir_y != UNDEFINED){
 			if ((currentLine + dir_y) >= 2 && (currentLine + dir_y) <= max_line){	
 				OLED_goto_line(currentLine);
 				OLED_store_sym(' ');
@@ -68,8 +68,10 @@ OLED_line fsm_MenuNavigate(OLED_line max_line){
 				OLED_store_sym('>');
 				OLED_refresh();
 			}	
-		} 
-		last_dir_y = dir_y;
+		}
+		if(dir_y != UNDEFINED){
+			last_dir_y = dir_y;
+		}
 		state_button = JOY_get_button();
 		if (last_state_button == 0 && state_button == 1){
 			return currentLine;

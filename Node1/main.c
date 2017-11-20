@@ -10,11 +10,11 @@
 int main(void){	
 
 	fsm_evInit();
-
+	//printf("hei");
 	while (1){
 		switch(fsm_getCurrentState()){
 			case STATE_MAIN_MENU:
-				switch(fsm_MenuNavigate(LINE_5)){
+				switch(fsm_menuNavigate(LINE_5)){
 					case(LINE_3):
 					//get_highscore_line(8,3);
 						fsm_evPong();
@@ -23,7 +23,7 @@ int main(void){
 						fsm_evSnek();
 						break;
 					case(LINE_5):
-						//fsm_evThanksTo();
+						fsm_evThanksTo();
 						//get_highscore_line(10,0);
 						//fsm_evPong();
 						break;
@@ -32,7 +32,7 @@ int main(void){
 				}
 				break;
 			case STATE_PONG:
-				switch(fsm_MenuNavigate(LINE_6)){
+				switch(fsm_menuNavigate(LINE_6)){
 					case(LINE_3):
 						pong_play(JOY);
 						break;
@@ -51,7 +51,7 @@ int main(void){
 				break;
 			
 			case STATE_SNEK:
-				switch(fsm_MenuNavigate(LINE_4)){
+				switch(fsm_menuNavigate(LINE_4)){
 					case(LINE_3):
 						//fsm_evMenu2();
 						break;
@@ -63,7 +63,7 @@ int main(void){
 				}
 				break;
 			case STATE_THANKS_TO:
-				switch(fsm_MenuNavigate(LINE_3)){
+				switch(fsm_menuNavigate(LINE_3)){
 					case(LINE_3):
 						fsm_evMainMenu();
 						break;
