@@ -65,7 +65,7 @@ void PlayPong(void){
 	//while (!game_over){
 		//
 		//if(CAN_receive(&results)){ 
-			//send_all(2); //kan være problematisk å sende dette hvis spillet egt er ferdig
+			//send_all(2); //kan vÃ¦re problematisk Ã¥ sende dette hvis spillet egt er ferdig
 			//
 			//if(scores.data[0]){
 				//score++;
@@ -103,7 +103,7 @@ void Pong_joy(void){
 	while (!game_over){
 		
 		if(CAN_receive(&results)){
-			send_all_joy(2); //kan være problematisk å sende dette hvis spillet egt er ferdig
+			send_all_joy(2); //kan vÃ¦re problematisk Ã¥ sende dette hvis spillet egt er ferdig
 			
 			if(results.data[1]){
 				score++;
@@ -131,7 +131,7 @@ void Pong_slider(void){
 	while (!game_over){
 		
 		if(CAN_receive(&results)){
-			send_all_slider(2); //kan være problematisk å sende dette hvis spillet egt er ferdig
+			send_all_slider(2); //kan vÃ¦re problematisk Ã¥ sende dette hvis spillet egt er ferdig
 			
 			if(results.data[1]){
 				score++;
