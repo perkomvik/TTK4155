@@ -9,12 +9,12 @@
 #include "ADC.h"
 
 void JOY_init(void){
-	set_bit(PORTD, PIND5); //joystick pullup
+	set_bit(PORTD, PIND5); // Set pin to input
 }
 
 
 uint8_t JOY_get_button(void){
-	return 1 > test_bit(PIND, PIND5); //did not return 1/0
+	return 1 > test_bit(PIND, PIND5); // Check if button is pressed
 }
 
 void JOY_get_pos(int arr[]){
@@ -65,9 +65,9 @@ uint8_t right_slider_pos(void){
 }
 
 uint8_t right_button(void){
-	return 0 < test_bit(PIND, PIND4); // did not return 0/1
+	return 0 < test_bit(PIND, PIND4); // Check if right button is pressed
 }
 
 uint8_t left_button(void){
-	return 0 < test_bit(PIND,PIND3); // did not return 0/1
+	return 0 < test_bit(PIND, PIND3); // Check if left button is pressed
 }

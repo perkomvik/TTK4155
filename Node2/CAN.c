@@ -9,21 +9,19 @@
 
 void CAN_init(uint8_t mode){
 	mcp2515_init(mode);
-	mcp2515_write(MCP_CANINTE, MCP_RX_INT);
-	cli();
-	// Interrupt on falling edge
-	//set_bit(EICRA, ISC21);
-	//clear_bit(EICRA, ISC20);
-	// Enable interrupt
-	set_bit(EIMSK,INT2);
-	set_bit(EIFR,INTF2);
-	// Enable global interrupts
-	sei();
+	mcp2515_write(MCP_CANINTE, MCP_RX_INT); // Enable interrupt
+
+	cli(); // Disable global interrupts
+
+	set_bit(EIMSK,INT2); // Enable interrupt 2
+	set_bit(EIFR,INTF2); // Clear intrerrupt flag 2
+
+	sei(); // Enable global interrupts
 	
 }
 void CAN_message_send(CAN_message* msg){
 	
-	mcp2515_write(MCP_TXB0SIDH, (msg->id) >> 3);
+	mcp2515_write(MCP_TXB0SIDH, (msg->id) >> 3); 
 	mcp2515_write(MCP_TXB0SIDL, (msg->id) << 5);
 	mcp2515_write(MCP_TXB0DLC, (msg->length));
 	

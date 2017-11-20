@@ -10,7 +10,7 @@
 
 uint8_t ADC_read(ADC_channel channel){ 
 
-	volatile char * a = (char*) ADC_MEM_ADR; //Create pointer mapped to ADC
+	volatile char * a = (char*) ADC_MEM_ADR; // Create pointer mapped to ADC
 	uint8_t result;
 
 	switch(channel){
