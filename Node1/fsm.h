@@ -6,38 +6,43 @@
  */ 
 #ifndef fsm_H_
 #define fsm_H_
-
-#include "OLED.h"
-#include "Utilities.h"
 #include <avr/io.h>
-#include "joystick.h"
-#include "Usart_Driver.h"
-#include "Memory.h"
+#include "utilities.h"
+#include "USART.h"
+#include "memory.h"
 #include "ADC.h"
+#include "joystick.h"
+#include "OLED.h"
 #include "CAN.h"
 #include "CAN_joystick.h"
-#include "Pong.h"
-#include "Menus.h"
-static uint8_t currentState;
+#include "pong.h"
+#include "menus.h"
+
+
+
 
 typedef enum tag_fsm_state {
 	STATE_MAIN_MENU = 0,
-	GAME = 1,
-	SNEK = 2,
-	THANKS_TO = 3,
+	STATE_PONG = 1,
+	STATE_SNEK = 2,
+	STATE_THANKS_TO = 3
 } fsm_state;
 
-#define JOY 0
-#define SLIDER 1
+typedef enum tag_game_mode{
+	JOY = 0,
+	SLIDER = 1
+}game_mode;
 
-void fsm_evInit();
-void fsm_evMainMenu();
-void fsm_evPong();
-void fsm_evSnek();
-void fsm_evThanksTo();
-void fsm_evMenu4();
-int fsm_evMenuNavigate();
+static uint8_t currentState;
 
-int fsm_getCurrentState();
+void fsm_evInit(void);
+void fsm_evMainMenu(void);
+void fsm_evPong(void);
+void fsm_evSnek(void);
+void fsm_evThanksTo(void);
+void fsm_evMenu4(void);
+OLED_line fsm_MenuNavigate(OLED_line max_line);
+
+fsm_state fsm_getCurrentState(void);
 void fsm_evReturn(void);
 #endif 

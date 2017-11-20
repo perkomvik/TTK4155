@@ -9,21 +9,24 @@
 #ifndef JOYSTICK_H_
 #define JOYSTICK_H_
 
-#include "Utilities.h"
+#include "utilities.h"
 
-void JOY_init();
-void JOY_calibrate();
-int JOY_get_button();
+typedef enum tag_JOY_dir_y{
+	UP = -1,
+	MIDDLE = 0,
+	DOWN = 1
+}JOY_dir_y;
+
+void JOY_init(void);
 void JOY_get_pos(int arr[]);
-char* JOY_get_dir();
-uint8_t JOY_get_pos_x();
-uint8_t JOY_get_pos_y();
-int JOY_get_dir_x();
-int JOY_get_dir_y();
-int left_slider_pos();
-int right_slider_pos();
-int left_button();
-int right_button();
+JOY_dir_y JOY_get_dir_y(void);
+uint8_t JOY_get_button(void);
+uint8_t JOY_get_x(void);
+uint8_t JOY_get_y(void);
+uint8_t left_slider_pos(void);
+uint8_t right_slider_pos(void);
+uint8_t left_button(void);
+uint8_t right_button(void);
 
 
 #endif /* JOYSTICK_H_ */

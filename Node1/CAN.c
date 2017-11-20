@@ -15,7 +15,7 @@ void CAN_init(uint8_t mode){
 	sei();// Enable global interrupts
 	
 }
-void CAN_message_send(CAN_message* msg){
+void CAN_message_send(CAN_msg* msg){
 
 	
 	mcp2515_write(MCP_TXB0SIDH, (msg->id) >> 3);
@@ -27,7 +27,7 @@ void CAN_message_send(CAN_message* msg){
 	}
 	mcp2515_request_to_send(MCP_RTS_TX0);
 }
-uint8_t CAN_receive(CAN_message* msg){
+uint8_t CAN_receive(CAN_msg* msg){
 	if (CAN_int_flag){
 		uint8_t IDHI = mcp2515_read(MCP_RXB0SIDH); //(msg->id)>>3);
 		uint8_t IDLO = mcp2515_read(MCP_RXB0SIDL); //5<<(msg->id));
@@ -47,7 +47,7 @@ uint8_t CAN_receive(CAN_message* msg){
 	return 0;
 }
 
-void CAN_print(CAN_message* msg){
+void CAN_print(CAN_msg* msg){
 	printf("CAN msg ID: %d \n", msg->id);
 	printf("CAN msg length: %d \n", msg->length);
 	printf("CAN msg data: ");

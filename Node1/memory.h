@@ -10,7 +10,6 @@
 #define MEMORY_H_
 
 #include "Utilities.h"
-void memoryTest(void);
 void init_memory(void);
 void SRAM_test(void);
 

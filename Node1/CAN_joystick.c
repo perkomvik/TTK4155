@@ -8,11 +8,11 @@
 
 #include "CAN_joystick.h"
 
-void send_joystick_dir(int msg_id){
-	uint8_t x  = JOY_get_pos_x();
-	uint8_t y = JOY_get_pos_y();
+void send_joystick_dir(uint8_t msg_id){
+	uint8_t x  = JOY_get_x();
+	uint8_t y = JOY_get_y();
 	//printf("Joystick X: %d \n", x);
-	CAN_message msg;
+	CAN_msg msg;
 	msg.id = msg_id;
 	msg.length = 2;
 	msg.data[0] = x;
@@ -20,32 +20,30 @@ void send_joystick_dir(int msg_id){
 	CAN_message_send(&msg);
 }
 
-void send_all_slider(int msg_id){
-	uint8_t x  = JOY_get_pos_x();
-	//uint8_t slider = right_slider_pos();
+void send_all_slider(uint8_t msg_id){
+	uint8_t x  = JOY_get_x();
 	uint8_t slider = right_slider_pos();
-	uint8_t button = JOY_get_button();
-	//printf("X: %d \t slider: %d \t B: %d \n", x,slider,button);
-	CAN_message msg;
+	uint8_t JOY_button = JOY_get_button();
+	//printf("X: %d \t slider: %d \t B: %d \n", x,slider,JOY_button);
+	CAN_msg msg;
 	msg.id = msg_id;
 	msg.length = 3;
 	msg.data[0] = x;
 	msg.data[1] = slider;
-	msg.data[2] = button;
+	msg.data[2] = JOY_button;
 	CAN_message_send(&msg);
 }
 
-void send_all_joy(int msg_id){
-	uint8_t x  = JOY_get_pos_x();
-	//uint8_t slider = right_slider_pos();
-	uint8_t y = JOY_get_pos_y();
-	uint8_t button = JOY_get_button();
-	//printf("X: %d \t Y: %d \t B: %d \n", x,y,button);
-	CAN_message msg;
+void send_all_joy(uint8_t msg_id){
+	uint8_t x  = JOY_get_x();
+	uint8_t y = JOY_get_y();
+	uint8_t JOY_button = JOY_get_button();
+	//printf("X: %d \t Y: %d \t B: %d \n", x,y,JOY_button);
+	CAN_msg msg;
 	msg.id = msg_id;
 	msg.length = 3;
 	msg.data[0] = x;
 	msg.data[1] = y;
-	msg.data[2] = button;
+	msg.data[2] = JOY_button;
 	CAN_message_send(&msg);
 }

@@ -8,44 +8,39 @@
 #include "ADC.h"
 
 
-uint8_t ADC_read(int channel){ 
+uint8_t ADC_read(ADC_channel channel){ 
 
-	
-	volatile char * a = (char*) 0x1400;
-
-	
+	volatile char * a = (char*) ADC_MEM_ADR; //Create pointer mapped to ADC
 	uint8_t result;
 
 	switch(channel){
-		
-		case(1): // Enable Channel 1 //Read X-input joystick
-			
+		case CHANNEL_1: // Read X-input joystick
 			*a = 4;
 			_delay_us(60);
 			result =*a;
 			break;
-		case(2): // Enable Channel 2 //Read Y-input joystick
-			
+
+		case CHANNEL_2: // Read Y-input joystick
 			*a = 5;
 			_delay_us(60);
 			result =*a;
 			break;
-		case(3): // Enable Channel 3 // read left slider
+
+		case CHANNEL_3: // Read left slider
 			*a = 6;
 			_delay_us(60);
 			result =*a;
 			break;
-		case(4): // Enable Channel 4 // read right slider
+
+		case CHANNEL_4: // Read right slider
 			*a = 7;
 			_delay_us(60);
 			result =*a;
 			break;
+
 		default:
-			return 0;
-		
+			result = 0;
+			break;
 	}
-	
-	
 	return result;
-	
 }

@@ -6,11 +6,10 @@
  */ 
 
 
-#include "Pong.h"
+#include "pong.h"
 #include "CAN_joystick.h"
 #include "OLED.h"
 #include "fsm.h"
-
 //static uint8_t highscore[6] = {0};
 	
 typedef struct Highscores_template{
@@ -24,90 +23,67 @@ volatile static Highscores_template Highscore[6] =  {
 { "Marius    ",1},
 { "Marius    ",1},
 { "Marius    ",1},
-{ "Marius    ",1},
+{ "Marius    ",1}
 };
 
 
-void update_score(uint8_t score){
+void pong_update_score(uint8_t score){
 	OLED_clear_line(5);
 	OLED_goto_line(5);
 	char myScore[16];
 	sprintf(myScore, "Your Score: %d", score);
-	print_OLED_string(myScore);
+	OLED_store_str(myScore);
 	OLED_refresh();
 }
-void Pong_init(uint8_t mode){
+void pong_init(game_mode mode){
 	OLED_clear();
-	print_OLED_string("   PONGO");
+	OLED_store_str("   PONGO");
 	OLED_goto_line(2);
-	print_OLED_string("Highscore:");
+	OLED_store_str("Highscore:");
 	OLED_goto_line(3);
-	print_OLED_string("Marius - 255");
+	OLED_store_str("Marius - 255");
 	OLED_goto_line(5);
-	print_OLED_string("Your Score: 0");
+	OLED_store_str("Your Score: 0");
 	OLED_goto_line(6);
-	print_OLED_string("Position: N/A");
+	OLED_store_str("Position: N/A");
 	OLED_refresh();
 	
 	//send game mode instruction to node 2
-	CAN_message game_mode;
-	game_mode.id = 0; //id 0 means game_mode
-	game_mode.length = 1;
-	game_mode.data[0] = mode;
-	CAN_message_send(&game_mode);
-}
-void PlayPong(void){
-	//Pong_init();
-	//CAN_message results;
-	//uint8_t score = 1;
-	//uint8_t game_over = 0;
-	//
-	//while (!game_over){
-		//
-		//if(CAN_receive(&results)){ 
-			//send_all(2); //kan vÃ¦re problematisk Ã¥ sende dette hvis spillet egt er ferdig
-			//
-			//if(scores.data[0]){
-				//score++;
-				////update_score(score);
-			//}
-			//if(scores.data[1]){
-				////game_over = 1;
-			//}
-		//}
-	//}
-	//fsm_evPong();
-	////update_Highscore(score);
+	CAN_msg mode_msg;
+	mode_msg.id = PONG_START; //id 0 means game_mode
+	mode_msg.length = 1;
+	mode_msg.data[0] = mode;
+	CAN_message_send(&mode_msg);
 }
 
-void PlayPong2(uint8_t mode){
+
+void pong_play(game_mode mode){
 	switch(mode){
 		case(JOY):
-			Pong_joy();
+			pong_JOY();
 			break;
 		case(SLIDER):
-			Pong_slider();
+			pong_slider();
 			break;
 		default:
 			break;
 	}
 }
 
-
-void Pong_joy(void){
-	Pong_init(JOY);
-	CAN_message results;
+void pong_JOY(void){
+	pong_init(JOY);
+	CAN_msg results;
 	uint8_t game_over = 0;
 	uint8_t score = 0;
 	
 	while (!game_over){
 		
 		if(CAN_receive(&results)){
-			send_all_joy(2); //kan vÃ¦re problematisk Ã¥ sende dette hvis spillet egt er ferdig
+			send_all_joy(PONG_INSTR); //kan være problematisk å sende dette hvis spillet egt er ferdig
 			
 			if(results.data[1]){
 				score++;
-				update_score(score);
+				pong_update_score(score);
 			}
 			if(results.data[1]){
 				//game_over = 1;
@@ -117,13 +93,11 @@ void Pong_joy(void){
 			}
 		}
 	}
-	
-	fsm_evPong();
 }
 
-void Pong_slider(void){
-	Pong_init(SLIDER);
-	CAN_message results;
+void pong_slider(void){
+	pong_init(SLIDER);
+	CAN_msg results;
 	uint8_t game_over = 0;
 	uint8_t score = 0;
 	
@@ -131,11 +105,11 @@ void Pong_slider(void){
 	while (!game_over){
 		
 		if(CAN_receive(&results)){
-			send_all_slider(2); //kan vÃ¦re problematisk Ã¥ sende dette hvis spillet egt er ferdig
+			send_all_slider(2); //kan være problematisk å sende dette hvis spillet egt er ferdig
 			
 			if(results.data[1]){
 				score++;
-				update_score(score);
+				pong_update_score(score);
 			}
 			if(results.data[1]){
 				if(score > 20){
@@ -148,8 +122,8 @@ void Pong_slider(void){
 	fsm_evPong();
 }
 
-void print_Highscore(void){
-	print_OLED_string(HIGHSCORES_MENU);
+void pong_print_highscore(void){
+	OLED_store_str(HIGHSCORES_MENU);
 	char str_num[3];
 	
 	for (uint8_t i = 0; i < 6; i++){
@@ -158,28 +132,27 @@ void print_Highscore(void){
 		}
 		OLED_goto_line(i+1);
 		printf("Senere navn: %s \n", Highscore[i].name);
-		print_OLED_string(Highscore[i].name);
-		print_OLED_symbol(' ');
+		OLED_store_str(Highscore[i].name);
+		OLED_store_sym(' ');
 		itoa(Highscore[i].score,str_num,10);
-		print_OLED_string(str_num);
+		OLED_store_str(str_num);
 	}
 	OLED_refresh();
 	fsm_evReturn();
-	fsm_evPong();
 }
 
-void update_Highscore(score){
+void pong_update_highscore(uint8_t score){
 	for (uint8_t i = 0; i < 6; i++){
 		if(score > Highscore[i].score){
-			get_highscore_line(Highscore[i].score, i);
+			pong_get_highscore_line(Highscore[i].score, i);
 		}else{
 			fsm_evMainMenu();
 		}
 	}
 }
 
-void get_highscore_line(uint8_t score, uint8_t lineNum){
-	print_OLED_string(CONGRATULATIONS_MENU);
+void pong_get_highscore_line(uint8_t score, uint8_t lineNum){
+	OLED_store_str(CONGRATULATIONS_MENU);
 	OLED_refresh();
 	_delay_ms(1000);
 	char name[10];
@@ -187,13 +160,13 @@ void get_highscore_line(uint8_t score, uint8_t lineNum){
 	char* name2;
 	sprintf(name2,name);
 	printf("%s \n", name2);
-	place_Highscore(name2,score,lineNum);
+	pong_place_highscore(name2,score,lineNum);
 	
 }
 
 
 
-void place_Highscore(char* name, uint8_t score, uint8_t lineNum){
+void pong_place_highscore(char* name, uint8_t score, uint8_t lineNum){
 	for(uint8_t i = 5; i > lineNum; i--){
 		Highscore[i-1].name = Highscore[i].name;
 		Highscore[i-1].score = Highscore[i].score; 

@@ -10,7 +10,7 @@
 #ifndef SPI_H_
 #define SPI_H_
 
-#include "Utilities.h"
+#include "utilities.h"
 
 char SPI_Read(void);
 void SPI_Send(char cData);

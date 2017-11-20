@@ -1,11 +1,9 @@
 #ifndef Usart_Driver_H_
 #define Usart_Driver_H_
 
-#define F_CPU 4915200
-#define FOSC 4915200// Clock Speed
 #define BAUD 9600
 #define MYUBRR FOSC/16/BAUD-1
-#include "Utilities.h"
+#include "utilities.h"
 #include <avr/io.h>
 #include <util/delay.h>
 //#include<time.h>

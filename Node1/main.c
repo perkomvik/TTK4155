@@ -4,48 +4,45 @@
  * Created: 30.08.2017 10:40:10
  *  Author: andersgd
  */ 
-
+#include <avr/io.h>
 #include "fsm.h"
 
 int main(void){	
-	
+
 	fsm_evInit();
-	
-	//USART_test();
-	//printf("Node 1 start\n");
+
 	while (1){
-		//printf("HEi\n");
 		switch(fsm_getCurrentState()){
 			case STATE_MAIN_MENU:
-				switch(fsm_evMenuNavigate(4)){
-					case(2):
+				switch(fsm_MenuNavigate(LINE_5)){
+					case(LINE_3):
 					//get_highscore_line(8,3);
 						fsm_evPong();
 						break;
-					case(3):
+					case(LINE_4):
 						fsm_evSnek();
 						break;
-					case(4):
+					case(LINE_5):
 						//fsm_evThanksTo();
-						get_highscore_line(10,0);
-						fsm_evPong();
+						//get_highscore_line(10,0);
+						//fsm_evPong();
 						break;
 					default:
 						break;
 				}
 				break;
-			case GAME:
-				switch(fsm_evMenuNavigate(5)){
-					case(2):
-						PlayPong2(JOY);
+			case STATE_PONG:
+				switch(fsm_MenuNavigate(LINE_6)){
+					case(LINE_3):
+						pong_play(JOY);
 						break;
-					case(3):
+					case(LINE_4):
 						//PlayPong2(SLIDER);
 						break;
-					case(4):
-						print_Highscore();
+					case(LINE_5):
+						pong_print_highscore();
 						break;
-					case(5):
+					case(LINE_6):
 						fsm_evMainMenu();
 						break;
 					default:
@@ -53,21 +50,21 @@ int main(void){
 				}
 				break;
 			
-			case SNEK:
-				switch(fsm_evMenuNavigate(3)){
-					case(2):
+			case STATE_SNEK:
+				switch(fsm_MenuNavigate(LINE_4)){
+					case(LINE_3):
 						//fsm_evMenu2();
 						break;
-					case(3):
+					case(LINE_4):
 						fsm_evMainMenu();
 						break;
 					default:
 						break;
 				}
 				break;
-			case THANKS_TO:
-				switch(fsm_evMenuNavigate(2)){
-					case(2):
+			case STATE_THANKS_TO:
+				switch(fsm_MenuNavigate(LINE_3)){
+					case(LINE_3):
 						fsm_evMainMenu();
 						break;
 					default:
@@ -173,22 +170,3 @@ int main(void){
 //SRAM_test();
 //int arr[2] = {0};
 
-
-
-//OLED_clear();
-//OLED_fill();
-//print_OLED_string("8--------D");
-//printf("X: %d \t Y: %d \n", JOY_get_dir_x(), JOY_get_dir_y());
-//OLED_clear();
-//OLED_fill();
-//_delay_ms(100);
-//OLED_goto_line(2);
-//*a = 0x00;
-//JOY_get_pos(arr);
-//printf("X: %d \t Y: %d \n", arr[0], arr[1]);
-//printf(left_slider_pos());
-//printf(right_slider_pos());
-//printf("DIR: %s \n", JOY_get_dir());
-//printf("left button: %d \t", left_slider_pos());
-//printf("right button: %d \n", right_slider_pos());
-//

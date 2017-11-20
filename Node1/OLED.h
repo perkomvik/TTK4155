@@ -5,31 +5,49 @@
  *  Author: perkom
  */ 
 
-
-
 //#ifndef OLED_H_
 #ifndef OLED_H_
 #define OLED_H_
-#include "Utilities.h"
-static int cursor;
+
+#include "utilities.h"
+#define ARROW 127
+#define FULLWHITE 31
+#define N_OLED_LINES 8
+#define N_OLED_LINE_BYTES 16
+#define N_OLED_BYTES 128
+#define OLED_C_MEM_ADR 0x1000
+#define OLED_D_MEM_ADR 0x1200
+#define SRAM_MEM_ADR 0x1800
+
+#define OLED_C ((volatile char*) (OLED_C_MEM_ADR))
+#define OLED_D ((volatile char*) (OLED_D_MEM_ADR))
+
+typedef enum tag_OLED_line{
+	LINE_1 = 0,
+	LINE_2 = 1,
+	LINE_3 = 2,
+	LINE_4 = 3,
+	LINE_5 = 4,
+	LINE_6 = 5,
+	LINE_7 = 6,
+	LINE_8 = 7
+}OLED_line;
+
+static int cursor = 0; // cursor represents OLED cursor for our SRAM
+
 void OLED_init(void); // PDF:“OLED LY190-128064" section 9.4
-void OLED_reset();
-void OLED_home();
-void OLED_goto_line(int line);
-void OLED_clear_line(int line);
+void OLED_home(void);
+void OLED_goto_line(OLED_line line);
+void OLED_clear_line(OLED_line line);
 void OLED_pos(uint8_t row, uint8_t column);
-void OLED_print(char* a);
-void OLED_set_brightness(int lvl);
-void OLED_set_memes();
-void OLED_fill();
-void OLED_clear();
-void write_c(uint8_t hex);
-void print_OLED_symbol_from_sram(char symbol);
-void print_OLED_symbol(char symbol);
-void print_OLED_string(char* string);
-void print_sram();
-void OLED_refresh();
-int get_cursor();
+void OLED_fill(void);
+void OLED_clear(void);
+void OLED_load_sym(char symbol);
+void OLED_store_sym(char symbol);
+void OLED_store_str(char* string);
+void OLED_print(void);
+void OLED_refresh(void);
+uint8_t get_cursor(void);
 
 
 #endif /* OLED_H_ */

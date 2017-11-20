@@ -8,99 +8,63 @@
 #include "joystick.h"
 #include "ADC.h"
 
-void JOY_init(){
-	//clear_bit(DDRD, 2); //middle joytstick button
-	set_bit(PORTD, 5); //joystick pullup
-	//clear_bit(DDRD,3); //left button
-	//clear_bit(DDRD, 4);  //right button
-	
-	//clear_bit() add joystick button
+void JOY_init(void){
+	set_bit(PORTD, PIND5); //joystick pullup
 }
 
-void JOY_calibrate(){
-	
-}
 
-int JOY_get_button(){
-	//printf("Joystick button status: %d\n" , CHECKBIT(PIND, PIND5));
-	return 1 > CHECKBIT(PIND, PIND5);
+uint8_t JOY_get_button(void){
+	return 1 > test_bit(PIND, PIND5); //did not return 1/0
 }
 
 void JOY_get_pos(int arr[]){
-	arr[0] = ADC_read(1);
-	arr[1] = ADC_read(2);
+	arr[0] = ADC_read(CHANNEL_1); 
+	arr[1] = ADC_read(CHANNEL_2);
 }
 
-uint8_t JOY_get_pos_x(){
-	uint8_t x = ADC_read(1);
-	if (x > 145){
+uint8_t JOY_get_x(void){
+	uint8_t x = ADC_read(CHANNEL_1);
+	if (x > 145 || x < 123){
 		return x;
 	}
-	else if (x < 123){
-		return x;
+	else {
+		return 127; //Stabilized Centered Value
 	}
-	else return 127;
 }
 
-uint8_t JOY_get_pos_y(){
-	uint8_t y = ADC_read(2);
-	if (y > 145){
+uint8_t JOY_get_y(void){
+	uint8_t y = ADC_read(CHANNEL_2);
+	if (y > 145 || y < 123){
 		return y;
 	}
-	else if (y < 123){
-		return y;
-	}
-	else return 127;
-}
-
-char* JOY_get_dir(){
-	int arr[2] = {0};
-	JOY_get_pos(arr);
-	if (arr[0] < 123){
-		return "LEFT";
-	} else if (arr[0] > 132){
-		return "RIGHT";
-	} else {
-		return "MIDDLE";
-	}	
-}
-
-
-
-int JOY_get_dir_x(){
-	int x = ADC_read(1);
-	if (x < 123){
-		return LEFT;
-	} else if (x > 136){
-		return RIGHT;
-	} else {
-		return MIDDLE;
+	else {
+		return 127; //Stabilized Centered Value
 	}
 }
 
-int JOY_get_dir_y(){
-	int y = ADC_read(2);
-	if (y < 100){
+JOY_dir_y JOY_get_dir_y(void){
+	uint8_t y = ADC_read(CHANNEL_2);
+	if (y < 50){
 		return DOWN;
-	} else if (y > 170){
+	} else if (y > 200){
 		return UP;
 	} else {
 		return MIDDLE;
 	}
 }
 
-int left_slider_pos(){
-	return ADC_read(3);
+uint8_t left_slider_pos(void){
+	return ADC_read(CHANNEL_3);
 }
 
-int right_slider_pos(){
-	return ADC_read(4);
+uint8_t right_slider_pos(void){
+	return ADC_read(CHANNEL_4);
 }
 
-int right_button(){
-	return 0 < CHECKBIT(PIND, PIND4);
+uint8_t right_button(void){
+	return 0 < test_bit(PIND, PIND4); // did not return 0/1
 }
 
-int left_button(){
-	return 0 < CHECKBIT(PIND,3);
+uint8_t left_button(void){
+	return 0 < test_bit(PIND,PIND3); // did not return 0/1
 }

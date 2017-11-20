@@ -11,8 +11,8 @@
 #include <stdlib.h>
 
 void init_memory(void){
-	set_bit(MCUCR,SRE);
-	set_bit(EMCUCR,2);
+	set_bit(MCUCR,SRE); // Enable external memory
+	set_bit(EMCUCR,2); //Is this needed? set wait time
 	//set_bit(EMCUCR,3);
 	//set_bit(SFIOR,XMM2);
 	//set_bit(EMCUCR, SRL2);
@@ -52,19 +52,4 @@ void SRAM_test(void){
 		}
 	}
 	printf("SRAM test completed with \n%4d errors in write phase and \n%4d errors in retrieval phase\n\n", write_errors, retrieval_errors); 
-}
-
-void memoryTest(){
-	set_bit(SFIOR, XMM2);
-	//set_bit(SFIOR, XMM1);
-	//set_bit(SFIOR, XMM0);
-	set_bit (DDRC, 0);
-	set_bit(DDRC, 1);
-	set_bit (DDRC, 2);
-	set_bit(DDRC,3);
-	_delay_ms(100);
-	
-	
-	
-	
 }
