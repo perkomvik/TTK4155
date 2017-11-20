@@ -108,6 +108,7 @@ void pong_JOY(void){
 			}
 		}
 	}
+	OLED_game_over_screen();
 	pong_update_highscore(score);
 	pong_print_highscore();
 	fsm_evPong();
@@ -132,8 +133,10 @@ void pong_slider(void){
 			}
 		}
 	}
+	OLED_game_over_screen();
 	pong_update_highscore(score);
 	pong_print_highscore();
+	fsm_evPong();
 }
 
 void pong_print_highscore(void){
@@ -152,7 +155,6 @@ void pong_print_highscore(void){
 	}
 	OLED_refresh();
 	fsm_Return();
-	fsm_evPong();
 }
 
 void pong_update_highscore(uint8_t score){

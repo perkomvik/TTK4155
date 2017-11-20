@@ -255,12 +255,6 @@
     <Compile Include="pong.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="snek.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="snek.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="SPI.c">
       <SubType>compile</SubType>
     </Compile>

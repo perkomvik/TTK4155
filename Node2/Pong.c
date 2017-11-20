@@ -36,8 +36,6 @@ void pong_JOY(void){
 	while(!game_over){
 		results.data[1] = is_goal();
 		if(CAN_receive(&instructions)){
-			//CAN_print(&msg);
-			motor_set_direction(instructions.data[0]);
 			motor_set_speed(instructions.data[0]);
 			//set_servo(instructions.data[1]);
 			set_servo(127);

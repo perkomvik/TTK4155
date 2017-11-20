@@ -42,6 +42,7 @@ void fsm_evPong(void){
 void fsm_evSnek(void){
 	OLED_clear();
 	OLED_store_menu(SNEK_MENU);
+	snek();
 	OLED_refresh();
 	currentState = STATE_SNEK;
 }

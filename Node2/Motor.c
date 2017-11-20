@@ -64,7 +64,7 @@ void motor_set_direction(motor_direction_t direction){
 }
 
 void motor_set_speed(uint8_t speed){
-	//printf("Y value: %d \n", speed);
+	motor_set_direction(speed);
 	switch (speed > 126){
 		case(LEFT):
 			DAC_send(126-speed);

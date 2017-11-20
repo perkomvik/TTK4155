@@ -9,8 +9,8 @@
 #define PONG_MENU \
 	"   PONG MENU    "\
 	"¤"				  \
-	">Use Joystick   "\
-	" Use slider     "\
+	">Play w/joystick"\
+	" Play w/slider  "\
 	" Highscores     "\
 	" Return         "
 

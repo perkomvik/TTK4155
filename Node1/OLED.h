@@ -51,7 +51,10 @@ void OLED_refresh(void);
 void OLED_store_menu(char* string);
 void OLED_loading_screen(void);
 void OLED_loading_screen_long(void);
+void OLED_game_over_screen(void);
+void OLED_snek(void);
 uint8_t get_cursor(void);
+
 
 
 #endif /* OLED_H_ */

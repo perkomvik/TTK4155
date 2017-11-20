@@ -215,3 +215,11 @@ void OLED_loading_screen_long(void){
 		_delay_ms(1200);
 	}
 }
+
+void OLED_game_over_screen(void){
+	OLED_clear();
+	OLED_goto_line(LINE_4);
+	OLED_store_str("    GAME OVER   ");
+	OLED_refresh();
+	_delay_ms(2000);
+}

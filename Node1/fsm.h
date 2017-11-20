@@ -17,6 +17,7 @@
 #include "CAN_joystick.h"
 #include "pong.h"
 #include "menus.h"
+#include "snek.h"
 
 
 
@@ -39,7 +40,6 @@ void fsm_evSnek(void);
 void fsm_evThanksTo(void);
 void fsm_evMenu4(void);
 OLED_line fsm_menuNavigate(OLED_line max_line);
-
 fsm_state fsm_getCurrentState(void);
 void fsm_Return(void);
 #endif 
