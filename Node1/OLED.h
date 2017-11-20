@@ -33,6 +33,7 @@ typedef enum tag_OLED_line{
 	LINE_8 = 7
 }OLED_line;
 
+
 static int cursor = 0; // cursor represents OLED cursor for our SRAM
 
 void OLED_init(void); // PDF:“OLED LY190-128064" section 9.4
@@ -48,6 +49,8 @@ void OLED_store_str(char* string);
 void OLED_print(void);
 void OLED_refresh(void);
 void OLED_store_menu(char* string);
+void OLED_loading_screen(void);
+void OLED_loading_screen_long(void);
 uint8_t get_cursor(void);
 
 

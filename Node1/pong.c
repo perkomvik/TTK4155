@@ -26,21 +26,19 @@ static volatile Highscores_template Highscore[6] =  {
 { "FFFFFFFFFF",1}
 };
 
-void print_struct(void){
-	for (uint8_t i = 0; i < 6; i++){
-		printf("%s\t", Highscore[i].name);
-	}
-	printf("\n");
-}
+
 
 void pong_update_score(uint8_t score){
-	uint8_t i = 0;
+	uint8_t i;
 	OLED_clear_line(5);
 	OLED_goto_line(5);
 	char myScore[16];
 	sprintf(myScore, " Your score: %d", score);
 	OLED_store_str(myScore);
-	for (i = 0; Highscore[i].score >= score && i < 6; i++){}
+	for (i = 0; (Highscore[i].score >= score && i < 6); i++){
+		_delay_us(10);
+	//printf("i: %d\n",i);
+	}
 	if(i != 6 ){
 		OLED_clear_line(6);
 		OLED_goto_line(6);
@@ -49,7 +47,24 @@ void pong_update_score(uint8_t score){
 	}
 	OLED_refresh();
 }
-void pong_init(game_mode mode){
+void pong_init(game_mode mode){	
+	//send game mode instruction to node 2
+	
+	
+	CAN_msg mode_msg;
+	mode_msg.id = PONG_START; //id 0 means game_mode
+	mode_msg.length = 1;
+	mode_msg.data[0] = mode;
+	CAN_message_send(&mode_msg);
+	switch(mode){
+		case JOY:
+			OLED_loading_screen();
+			break;
+		case SLIDER:
+			OLED_loading_screen_long();
+			break;
+	}
+
 	OLED_clear();
 	OLED_store_menu(PLAYING_PONG_MENU);
 	if(Highscore[0].score > 0){
@@ -58,15 +73,7 @@ void pong_init(game_mode mode){
 		sprintf(top_player, " %s  %d", Highscore[0].name, Highscore[0].score);
 		OLED_store_str(top_player);
 	}
-	
 	OLED_refresh();
-	
-	//send game mode instruction to node 2
-	CAN_msg mode_msg;
-	mode_msg.id = PONG_START; //id 0 means game_mode
-	mode_msg.length = 1;
-	mode_msg.data[0] = mode;
-	CAN_message_send(&mode_msg);
 }
 
 
@@ -102,8 +109,11 @@ void pong_JOY(void){
 		}
 	}
 	pong_update_highscore(score);
+	pong_print_highscore();
 	fsm_evPong();
 }
+
+
 
 void pong_slider(void){
 	pong_init(SLIDER);
@@ -123,7 +133,7 @@ void pong_slider(void){
 		}
 	}
 	pong_update_highscore(score);
-	fsm_evPong();
+	pong_print_highscore();
 }
 
 void pong_print_highscore(void){
@@ -141,7 +151,7 @@ void pong_print_highscore(void){
 		OLED_store_str(str_num);
 	}
 	OLED_refresh();
-	fsm_evReturn();
+	fsm_Return();
 	fsm_evPong();
 }
 
@@ -149,7 +159,6 @@ void pong_update_highscore(uint8_t score){
 	for (uint8_t i = 0; i < 6; i++){
 		if(score > Highscore[i].score){
 			pong_get_highscore_line(score, i);
-			pong_print_highscore();
 			pong_save_highscore();
 			break;
 		}
@@ -213,6 +222,14 @@ void pong_load_highscore(void){
 		adr++;
 	}
 }
+
 void pong_highscore_init(void){
 	pong_load_highscore();
+}
+
+void print_struct(void){
+	for (uint8_t i = 0; i < 6; i++){
+		printf("%s\t", Highscore[i].name);
+	}
+	printf("\n");
 }

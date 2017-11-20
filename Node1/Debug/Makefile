@@ -48,6 +48,7 @@ C_SRCS +=  \
 ../memory.c \
 ../OLED.c \
 ../pong.c \
+../snek.c \
 ../SPI.c \
 ../test.c \
 ../USART.c \
@@ -72,6 +73,7 @@ MCP2515.o \
 memory.o \
 OLED.o \
 pong.o \
+snek.o \
 SPI.o \
 test.o \
 USART.o \
@@ -89,6 +91,7 @@ MCP2515.o \
 memory.o \
 OLED.o \
 pong.o \
+snek.o \
 SPI.o \
 test.o \
 USART.o \
@@ -106,6 +109,7 @@ MCP2515.d \
 memory.d \
 OLED.d \
 pong.d \
+snek.d \
 SPI.d \
 test.d \
 USART.d \
@@ -123,6 +127,7 @@ MCP2515.d \
 memory.d \
 OLED.d \
 pong.d \
+snek.d \
 SPI.d \
 test.d \
 USART.d \
@@ -142,6 +147,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

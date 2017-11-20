@@ -179,3 +179,39 @@ void OLED_store_menu(char* string){ // Stores chosen menu in SRAM to be printed 
 		}
 	}
 }
+
+void OLED_loading_screen(void){
+	uint8_t dot_step = 1;
+	OLED_clear();
+	OLED_goto_line(LINE_4);
+	OLED_store_str("    LOADING     ");
+	for(uint8_t i = 0; i < 3; i+=dot_step){
+		OLED_pos(LINE_4,11+i);
+		if(i == 0){
+			OLED_store_sym('.');
+		} else{
+			OLED_store_sym('.');
+			OLED_pos(LINE_4,12+i-dot_step);
+		}
+		OLED_refresh();
+		_delay_ms(600);
+	}
+}
+
+void OLED_loading_screen_long(void){
+	uint8_t dot_step = 1;
+	OLED_clear();
+	OLED_goto_line(LINE_4);
+	OLED_store_str("    LOADING     ");
+	for(uint8_t i = 0; i < 3; i+=dot_step){
+		OLED_pos(LINE_4,11+i);
+		if(i == 0){
+			OLED_store_sym('.');
+			} else{
+			OLED_store_sym('.');
+			OLED_pos(LINE_4,12+i-dot_step);
+		}
+		OLED_refresh();
+		_delay_ms(1200);
+	}
+}

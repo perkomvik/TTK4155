@@ -52,8 +52,7 @@
 	"¤"\
 	"  You made the  "\
 	" Highscore list "\
-	"¤"               \
+	"¤"\
 	" Use the PC to  "\
 	" Enter your name"
-
 

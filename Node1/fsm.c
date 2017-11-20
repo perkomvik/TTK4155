@@ -54,35 +54,38 @@ void fsm_evThanksTo(void){
 }
 
 OLED_line fsm_menuNavigate(OLED_line max_line){
-	int last_dir_y = 0;
-	int dir_y;
-	int state_button;
-	OLED_line currentLine = LINE_3;
-	int last_state_button = 1;
+	JOY_dir_y prev_dir_y = UNDEFINED;
+	JOY_dir_y cur_dir_y;
+	uint8_t last_state_button = 1;
+	uint8_t cur_state_button;
+	OLED_line cur_line = LINE_3;
 	while(1){
-		dir_y = JOY_get_dir_y();
-		if (last_dir_y == MIDDLE && dir_y != MIDDLE && dir_y != UNDEFINED){
-			if ((currentLine + dir_y) >= 2 && (currentLine + dir_y) <= max_line){	
-				OLED_goto_line(currentLine);
+		cur_dir_y = JOY_get_dir_y();
+		if (prev_dir_y == MIDDLE && cur_dir_y != MIDDLE && cur_dir_y != UNDEFINED){
+			if ((cur_line + cur_dir_y) >= 2 && (cur_line + cur_dir_y) <= max_line){	
+				OLED_goto_line(cur_line);
 				OLED_store_sym(' ');
-				OLED_goto_line(currentLine += dir_y);
+				OLED_goto_line(cur_line += cur_dir_y);
 				OLED_store_sym('>');
 				OLED_refresh();
 			}	
 		}
-		if(dir_y != UNDEFINED){
-			last_dir_y = dir_y;
+		//Saturation for direction of y
+		if(cur_dir_y != UNDEFINED){
+			prev_dir_y = cur_dir_y;
 		}
-		state_button = JOY_get_button();
-		if (last_state_button == 0 && state_button == 1){
-			return currentLine;
-		}
-		last_state_button = state_button;
+		//Prevent spamming presses across states
+		cur_state_button = JOY_get_button();
+		if (last_state_button == 0 && cur_state_button == 1){
+			return cur_line;
+		} else{
+			last_state_button = cur_state_button;
+		}	
 	}
 }
 
-//Loop until button press
-void fsm_evReturn(void){
+//Loop until button press with spam protection
+void fsm_Return(void){
 	uint8_t last_state_button = 1;
 	while(1){
 		if(JOY_get_button() && !last_state_button){

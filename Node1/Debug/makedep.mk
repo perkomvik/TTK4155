@@ -24,6 +24,8 @@ OLED.c
 
 pong.c
 
+snek.c
+
 SPI.c
 
 test.c

@@ -41,5 +41,5 @@ void fsm_evMenu4(void);
 OLED_line fsm_menuNavigate(OLED_line max_line);
 
 fsm_state fsm_getCurrentState(void);
-void fsm_evReturn(void);
+void fsm_Return(void);
 #endif 

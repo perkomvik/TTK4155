@@ -19,11 +19,10 @@ static uint8_t last_goal_status = 0;
 
 void IR_init(void){
 	ADC_init();
-	//_delay_ms(200);
 }
 
 void IR_calibrate(void){
-	for(uint8_t i = 0; i <10; i++){
+	for(uint8_t i = 0; i <30; i++){
 		IR_MM();
 	}
 	uint16_t last_read[2] = {0};
@@ -35,7 +34,7 @@ void IR_calibrate(void){
 		IR_MM();
 		diff = last_read-total_read[IR1];
 	} while (!(diff < 10 || diff > -10));
-	IR0_low = last_read[IR0]/4;
+	IR0_low = last_read[IR0]/2;
 	IR1_low = 4*last_read[IR1]/5;
 	printf("IR0_low: %d\t", IR0_low);
 	printf("IR1_low: %d\n", IR1_low);
