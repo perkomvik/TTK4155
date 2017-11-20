@@ -16,6 +16,7 @@ static uint16_t IR0_low;
 static uint16_t IR1_low;
 static uint8_t goal = 0;
 static uint8_t last_goal_status = 0;
+
 void IR_init(void){
 	ADC_init();
 	//_delay_ms(200);
@@ -55,10 +56,11 @@ void IR_MM(void){
 	if(read_index >= num_reads){
 		read_index = 0;
 	}
-	//printf("IR0: %d \t" ,total_read[IR0]);
-	//printf("IR1: %d \t" ,total_read[IR1]);
-	//printf("IR0_low: %d\t", IR0_low);
-	//printf("IR1_low: %d\n", IR1_low);
+
+	printf("IR0: %d \t" ,total_read[IR0]);
+	printf("IR1: %d \t" ,total_read[IR1]);
+	printf("IR0_low: %d\t", IR0_low);
+	printf("IR1_low: %d\n", IR1_low);
 	
 }
 

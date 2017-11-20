@@ -8,6 +8,8 @@ CAN.c
 
 CAN_joystick.c
 
+EEPROM.c
+
 fsm.c
 
 joystick.c

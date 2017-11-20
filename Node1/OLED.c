@@ -170,7 +170,6 @@ void OLED_store_menu(char* string){
 		if (cursor < N_OLED_BYTES){
 			sram_pointer = (uint8_t *)(SRAM_MEM_ADR + cursor);
 			if(string[str_index] == '¤'){
-				printf("clear line: %d\n",cursor/N_OLED_LINE_BYTES);
 				OLED_clear_line(cursor/N_OLED_LINE_BYTES);
 				str_index++;
 			}else{

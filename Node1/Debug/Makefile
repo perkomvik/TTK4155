@@ -40,6 +40,7 @@ C_SRCS +=  \
 ../ADC.c \
 ../CAN.c \
 ../CAN_joystick.c \
+../EEPROM.c \
 ../fsm.c \
 ../joystick.c \
 ../main.c \
@@ -63,6 +64,7 @@ OBJS +=  \
 ADC.o \
 CAN.o \
 CAN_joystick.o \
+EEPROM.o \
 fsm.o \
 joystick.o \
 main.o \
@@ -79,6 +81,7 @@ OBJS_AS_ARGS +=  \
 ADC.o \
 CAN.o \
 CAN_joystick.o \
+EEPROM.o \
 fsm.o \
 joystick.o \
 main.o \
@@ -95,6 +98,7 @@ C_DEPS +=  \
 ADC.d \
 CAN.d \
 CAN_joystick.d \
+EEPROM.d \
 fsm.d \
 joystick.d \
 main.d \
@@ -111,6 +115,7 @@ C_DEPS_AS_ARGS +=  \
 ADC.d \
 CAN.d \
 CAN_joystick.d \
+EEPROM.d \
 fsm.d \
 joystick.d \
 main.d \
@@ -137,6 +142,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

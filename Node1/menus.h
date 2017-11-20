@@ -42,7 +42,7 @@
 	" PLAYING PONG   "\
 	"¤"\
 	" Highscore:     "\
-	" Marius - 255   "\
+	"¤"\
 	"¤"\
 	" Your score: 0  "\
 	" Position: N/A  "

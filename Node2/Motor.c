@@ -129,25 +129,6 @@ int16_t motor_read_rotation(uint8_t reset_flag){
 	return rot;
 }
 
-//void motor_calibrate() {
-	//motor_set_direction(21);
-	//motor_set_speed(0);
-	//int16_t cur_rot = motor_read_rotation(1);
-	//int16_t prev_rot = cur_rot+200;
-	//while(prev_rot != cur_rot) {
-		//printf("Encoder prev: %d\t",prev_rot);
-		//prev_rot = cur_rot;
-		//_delay_ms(40);
-		//cur_rot = motor_read_rotation(0);
-		//
-		//printf("Encoder cur: %d\n",prev_rot);
-	//}
-	//motor_set_speed(126);
-	//_delay_ms(500);
-	//motor_reset_encoder();
-	//
-	//
-//}
 
 void motor_move(int16_t diff_rot, uint8_t power) {
 	if (diff_rot > 100) {

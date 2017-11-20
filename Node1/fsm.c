@@ -21,6 +21,7 @@ void fsm_evInit(void){
 	JOY_init();
 	OLED_init();
 	CAN_init(MODE_NORMAL);
+	pong_highscore_init();
 	fsm_evMainMenu();
 }
 

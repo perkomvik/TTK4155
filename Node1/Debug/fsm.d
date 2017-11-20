@@ -21,7 +21,7 @@ fsm.d fsm.o: .././fsm.c .././fsm.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdlib.h \
  .././USART.h .././memory.h .././Utilities.h .././ADC.h .././joystick.h \
  .././OLED.h .././CAN.h .././MCP2515.h .././SPI.h .././CAN_joystick.h \
- .././pong.h .././menus.h
+ .././pong.h .././EEPROM.h .././menus.h
 
 .././fsm.h:
 
@@ -86,5 +86,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././CAN_joystick.h:
 
 .././pong.h:
+
+.././EEPROM.h:
 
 .././menus.h:

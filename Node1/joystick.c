@@ -44,7 +44,6 @@ uint8_t JOY_get_y(void){
 
 JOY_dir_y JOY_get_dir_y(void){
 	uint8_t y = ADC_read(CHANNEL_2);
-	printf("Y: %d\n", y);
 	if (y < 5){
 		return DOWN;
 	} else if (y > 250){

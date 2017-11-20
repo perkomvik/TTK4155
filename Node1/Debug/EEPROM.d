@@ -1,4 +1,4 @@
-pong.d pong.o: .././pong.c .././pong.h .././utilities.h \
+EEPROM.d EEPROM.o: .././EEPROM.c .././EEPROM.h .././utilities.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -17,12 +17,9 @@ pong.d pong.o: .././pong.c .././pong.h .././utilities.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h \
- c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdlib.h \
- .././EEPROM.h .././CAN_joystick.h .././Utilities.h .././joystick.h \
- .././CAN.h .././MCP2515.h .././SPI.h .././OLED.h .././fsm.h .././USART.h \
- .././memory.h .././ADC.h .././menus.h
+ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdlib.h
 
-.././pong.h:
+.././EEPROM.h:
 
 .././utilities.h:
 
@@ -63,29 +60,3 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\lib\gcc\avr\4.8.1\include\stddef.h:
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\stdlib.h:
-
-.././EEPROM.h:
-
-.././CAN_joystick.h:
-
-.././Utilities.h:
-
-.././joystick.h:
-
-.././CAN.h:
-
-.././MCP2515.h:
-
-.././SPI.h:
-
-.././OLED.h:
-
-.././fsm.h:
-
-.././USART.h:
-
-.././memory.h:
-
-.././ADC.h:
-
-.././menus.h:

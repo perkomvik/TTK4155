@@ -17,20 +17,6 @@
 #include "PID.h"
 #include "motor.h"
 
-
-
-#define Kp 1
-#define Ki 10
-#define Kd 0.01
-#define dt 0.016
-//#define Kp 1
-//#define Ki 0.5
-//#define Kd 0.03
-
-static int16_t rot_max;
-static int16_t rot_min = 0;
-static double integral = 0;
-static int16_t prev_error = 0;
 ISR(TIMER2_OVF_vect){
 	timer_flag = 1;
 }
@@ -84,10 +70,10 @@ void PID(uint8_t pos_ref){
 	
 	
 		int16_t error = pos_ref - (int)measured;
-		printf("Error: %d\t", error);
+		//printf("Error: %d\t", error);
 		integral = integral + error * dt;
 		int measure = (integral*(Ki));
-		printf("integral: %d\n", measure);
+		//printf("integral: %d\n", measure);
 		if (error < 1 && error > -1){
 			integral = 0;
 		}
