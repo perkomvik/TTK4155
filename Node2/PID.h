@@ -9,19 +9,24 @@
 #ifndef PID_H_
 #define PID_H_
 
+#define Kp 1
+#define Ki 10
+#define Kd 0.01
+#define dt 0.016
+//#define Kp 1
+//#define Ki 0.5
+//#define Kd 0.03
 
+static int16_t rot_max;
+static int16_t rot_min = 0;
+static double integral = 0;
+static int16_t prev_error = 0;
 
-typedef enum{
-	EASY,
-	MEDIUM,
-	HARD
-} difficulty_t;
 static volatile uint8_t timer_flag = 0;
-void PID_update_pos_ref(int16_t pos);
-void PID_init();
-void PID_update(difficulty_t);
-void PID(void);
-ISR(TIMER2_OVF_vect);
 
+void PID_init(void);
+void PID(uint8_t pos_ref);
+void PID_calibrate(void);
+ISR(TIMER2_OVF_vect);
 
 #endif /* PID_H_ */

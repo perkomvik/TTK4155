@@ -34,7 +34,7 @@ void IR_calibrate(void){
 		IR_MM();
 		diff = last_read-total_read[IR1];
 	} while (!(diff < 10 || diff > -10));
-	IR0_low = last_read[IR0]/2;
+	IR0_low = last_read[IR0]/4;
 	IR1_low = 4*last_read[IR1]/5;
 	printf("IR0_low: %d\t", IR0_low);
 	printf("IR1_low: %d\n", IR1_low);

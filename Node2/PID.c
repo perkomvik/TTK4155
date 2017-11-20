@@ -12,49 +12,83 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "Utilities.h"
+#include "utilities.h"
 
 #include "PID.h"
 #include "motor.h"
 
-int16_t rot_max = -8800;
-int16_t rot_min = 0;
 
-int16_t ref_position = 0;
-//double motor_middle = 0;
-double Kp = 1;
-double Ki = 0.5;
-double Kd = 0.03;
-double integral = 0;
-int16_t prev_error = 0;
-double dt = 0.016;
 
+#define Kp 1
+#define Ki 10
+#define Kd 0.01
+#define dt 0.016
+//#define Kp 1
+//#define Ki 0.5
+//#define Kd 0.03
+
+static int16_t rot_max;
+static int16_t rot_min = 0;
+static double integral = 0;
+static int16_t prev_error = 0;
 ISR(TIMER2_OVF_vect){
 	timer_flag = 1;
 }
-
-void PID(void){
+void PID_calibrate(void){
+	motor_set_direction(21);
+	motor_set_speed(50);
+	int16_t cur_rot = motor_read_rotation(0);
+	int16_t prev_rot = cur_rot+200;
+	while(prev_rot != cur_rot) {
+		printf("Encoder prev: %d\t",prev_rot);
+		prev_rot = cur_rot;
+		_delay_ms(40);
+		cur_rot = motor_read_rotation(0);
+		
+		printf("Encoder cur: %d\n",prev_rot);
+	}
+	
+	motor_set_speed(0);
+	_delay_us(500);
+	motor_reset_encoder();
+	motor_set_direction(150);
+	motor_set_speed(200);
+	cur_rot = 0;
+	prev_rot = cur_rot-200;
+	while(prev_rot != cur_rot) {
+		printf("Encoder prev: %d\n",prev_rot);
+		prev_rot = cur_rot;
+		_delay_ms(40);
+		cur_rot = motor_read_rotation(0);
+		
+		//printf("Encoder cur: %d\n",prev_rot);
+	}
+	rot_max = cur_rot;
+}
+void PID(uint8_t pos_ref){
 	if (timer_flag){
-		clear_bit(TIMSK2,TOIE2);
+		clear_bit(TIMSK2,TOIE2); //disbale interupt whiole handling PID 
 		int16_t motor_rot = motor_read_rotation(0);
 		//printf("Encoder: %d\t", motor_rot);
 		double measured = (double)((motor_rot - rot_min)/(double)(rot_max))*255;
 		//printf("Malt: %d\t", (uint16_t)measured);
 		//double measured = (motor_rot + motor_middle) / (-motor_middle/100);
 		//(double)((read_value - enc_min)/(double)(enc_max))*255;
-		int16_t ref = ref_position;
-		if(ref >240){
-			ref = 240;
-		} else if(ref<10){
-			ref = 10;
+		
+		if(pos_ref >240){
+			pos_ref = 240;
+			} else if(pos_ref<10){
+			pos_ref = 10;
 		}
 		
 	
 	
-		int16_t error = ref - (int)measured;
+		int16_t error = pos_ref - (int)measured;
+		printf("Error: %d\t", error);
 		integral = integral + error * dt;
-		//printf("Error: %d\t", error);
-		if (error < 1){
+		int measure = (integral*(Ki));
+		printf("integral: %d\n", measure);
+		if (error < 1 && error > -1){
 			integral = 0;
 		}
 	
@@ -62,7 +96,7 @@ void PID(void){
 	
 		int16_t power_signed = 0;
 		uint8_t power = 0;
-		power_signed = Kp * error + Ki  * integral + Kd * derivative;
+		power_signed = error*Kp + integral*Ki + derivative*Kd;
 	
 		prev_error = error;
 		//printf("power Signed: %d\n",power_signed);
@@ -75,12 +109,12 @@ void PID(void){
 				power = power_signed;
 		}
 	//printf("True power: %d\n", power);
-	motor_set_speed_2(power);
+		motor_set_speed_2(power);
+		timer_flag = 0;
+		set_bit(TIMSK2,TOIE2); //enable interupot
 	}
-	timer_flag = 0;
-	set_bit(TIMSK2,TOIE2);
 }
-void PID_init(){
+void PID_init(void){
 	
 	//-------------INITIALIZE TIMER INPUT-----------------
 	
@@ -99,29 +133,4 @@ void PID_init(){
 	
 	//---------------------------------------------------
 	
-}
-
-void PID_update_pos_ref(int16_t pos){
-	ref_position = pos;
-}
-
-void PID_update(difficulty_t difficulty){
-	
-	switch (difficulty){
-		case EASY:
-		Kp = 1;
-		Ki = 0.5;
-		Kd = 0.015;
-		break;
-		case MEDIUM:
-		Kp = 2;
-		Ki = 4;
-		Kd = 0.1;
-		break;
-		case HARD:
-		Kp = 2;
-		Ki = 4;
-		Kd = 0.01;
-		break;
-	}
 }

@@ -64,7 +64,7 @@ void pong_slider(void){
 	results.data[0] = 0;
 	results.data[1] = 0;
 	
-	motor_calibrate();
+	PID_calibrate();
 	IR_calibrate();
 	
 	//Start flow of information
@@ -74,10 +74,7 @@ void pong_slider(void){
 		results.data[1] = is_goal();
 		if(CAN_receive(&instructions)){
 			//CAN_print(&instructions);
-			PID_update_pos_ref(instructions.data[1]);
-			PID();
-			set_servo(instructions.data[1]);
-			//printf("results.data[0]: %d\n", results.data[0]);
+			PID(instructions.data[1]);
 			set_servo(instructions.data[0]);
 			solenoid_fire(instructions.data[2]);
 			_delay_ms(10);
