@@ -8,25 +8,18 @@
 
  
  void SPI_master_init(void){
-	 /* Set MOSI and SCK output, all others input */
-	 DDRB |= (1<<DDB5)|(1<< DDB7)|(1<<DDB4); // må ha med en til slave greie pb0 og pb7 i node 2?
-	 /* Enable SPI, Master, set clock rate fck/16 */
-	 SPCR = (1<<MSTR)|(1<<SPR0);
-	 SPCR |= (1<<SPE);
+	 DDRB |= (1<<DDB5)|(1<< DDB7)|(1<<DDB4);  // Set MOSI, SCK and SS output, all others input
+	 SPCR |= (1<<MSTR)|(1<<SPR0)|(1<<SPE); // Enable Master, set clock rate fck/16 and enable SPI
  }
  
  
  char SPI_read(){
-	 /* Start transmission */
-	 SPDR = 0xFF;
-	 /* Wait for transmission complete */
-	 while(!(SPSR & (1<<SPIF))){}
-	 return SPDR;
+	 SPDR = 0xFF; // Send dummy byte to start transmission
+	 while(!(SPSR & (1<<SPIF))){} // Wait for finished transmission 
+	 return SPDR; // Return data
  }
 
  void SPI_send(char cData){
-	 /* Start transmission */
-	 SPDR = cData;
-	 /* Wait for transmission complete */
-	 while(!(SPSR & (1<<SPIF))){}
+	 SPDR = cData; // Send data
+	 while(!(SPSR & (1<<SPIF))){} // Wait for finished transmission
  }

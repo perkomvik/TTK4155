@@ -12,7 +12,7 @@
 
 void init_memory(void){
 	set_bit(MCUCR,SRE); // Enable external memory
-	set_bit(EMCUCR,2); //Is this needed? set wait time
+	set_bit(EMCUCR,2); // Setting wait state: wait two cycles. Is this needed?
 	//set_bit(EMCUCR,3);
 	//set_bit(SFIOR,XMM2);
 	//set_bit(EMCUCR, SRL2);
