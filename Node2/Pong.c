@@ -6,16 +6,20 @@
  */ 
 #include "Pong.h"
 
-#define joy 0
-#define slider 1
+
+typedef enum tag_game_mode{
+	JOY = 0,
+	SLIDER = 1
+}game_mode;
+
 
 
 void PlayPong(uint8_t mode){
 	switch(mode){
-		case(joy):
+		case(JOY):
 			Pong_joy();
 			break;
-		case(slider):
+		case(SLIDER):
 			Pong_slider();
 			break;
 		default:
@@ -27,7 +31,7 @@ void Pong_joy(void){
 	uint8_t game_over = 0;
 	CAN_message instructions;
 	CAN_message results;
-	results.id = 2;
+	results.id = PONG_RESULT;
 	results.length = 2;
 	results.data[0] = 0;
 	results.data[1] = 0;

@@ -18,6 +18,7 @@
 
 int main(void){	
 	USART_Init();
+	//printf("hei\n");
 	DAC_init();
 	motor_init();
 	//PID_init();
@@ -29,10 +30,11 @@ int main(void){
 	while(1)
     {	
 		if(CAN_receive(&msg)){
-			if (msg.id==0){
+			CAN_print(&msg);
+			if (msg.id==PONG_START){
 				PlayPong(msg.data[0]);
 			}
 		}
-	
+		
     }
 }

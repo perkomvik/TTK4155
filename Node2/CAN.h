@@ -17,6 +17,12 @@ typedef struct CAN_message{
 	uint8_t data[8];
 }CAN_message;
 
+typedef enum tag_CAN_msg_id{
+	PONG_START = 0,
+	PONG_INSTR = 1,
+	PONG_RESULT = 2
+}CAN_msg_id;
+
 static volatile uint8_t CAN_int_flag = 0;
 void CAN_init(uint8_t mode);
 void CAN_message_send(CAN_message* msg);
