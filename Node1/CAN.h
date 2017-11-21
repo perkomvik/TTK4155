@@ -9,7 +9,7 @@
 #ifndef CAN_H_
 #define CAN_H_
 
-#include "Utilities.h"
+#include "utilities.h"
 #include "MCP2515.h"
 
 typedef struct CAN_msg{

@@ -26,9 +26,5 @@ pong.c
 
 SPI.c
 
-test.c
-
 USART.c
-
-utilities.c
 

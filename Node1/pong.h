@@ -24,8 +24,6 @@ typedef enum tag_game_results{
 	GOAL = 1,
 }game_results;
 
-
-
 void pong_init(game_mode mode);
 void pong_play(game_mode mode);
 void pong_JOY(void);

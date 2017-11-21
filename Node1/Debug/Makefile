@@ -49,9 +49,7 @@ C_SRCS +=  \
 ../OLED.c \
 ../pong.c \
 ../SPI.c \
-../test.c \
-../USART.c \
-../utilities.c
+../USART.c
 
 
 PREPROCESSING_SRCS += 
@@ -73,9 +71,7 @@ memory.o \
 OLED.o \
 pong.o \
 SPI.o \
-test.o \
-USART.o \
-utilities.o
+USART.o
 
 OBJS_AS_ARGS +=  \
 ADC.o \
@@ -90,9 +86,7 @@ memory.o \
 OLED.o \
 pong.o \
 SPI.o \
-test.o \
-USART.o \
-utilities.o
+USART.o
 
 C_DEPS +=  \
 ADC.d \
@@ -107,9 +101,7 @@ memory.d \
 OLED.d \
 pong.d \
 SPI.d \
-test.d \
-USART.d \
-utilities.d
+USART.d
 
 C_DEPS_AS_ARGS +=  \
 ADC.d \
@@ -124,9 +116,7 @@ memory.d \
 OLED.d \
 pong.d \
 SPI.d \
-test.d \
-USART.d \
-utilities.d
+USART.d
 
 OUTPUT_FILE_PATH +=Node1.elf
 
@@ -142,10 +132,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-
-
-
-
 
 
 

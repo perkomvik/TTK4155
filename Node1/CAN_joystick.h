@@ -14,8 +14,8 @@
 #include "joystick.h"
 #include "CAN.h"
 
-void send_joystick_dir(uint8_t msg_id);
-void send_all_slider(uint8_t msg_id);
-void send_all_joy(uint8_t msg_id);
+void CAN_send_JOY_dir(uint8_t msg_id);
+void CAN_send_all_slider(uint8_t msg_id);
+void CAN_send_all_JOY(uint8_t msg_id);
 
 #endif 

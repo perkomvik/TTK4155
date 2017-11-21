@@ -16,7 +16,6 @@ fsm_state fsm_getCurrentState(void){
 void fsm_evInit(void){
 	USART_Init();
 	memory_init();
-	_delay_us(100); //NEEDED?
 	JOY_init();
 	OLED_init();
 	CAN_init(MODE_NORMAL);
@@ -61,7 +60,7 @@ OLED_line fsm_menuNavigate(OLED_line max_line){
 	while(1){
 		cur_dir_y = JOY_get_dir_y();
 		if (prev_dir_y == MIDDLE && cur_dir_y != MIDDLE && cur_dir_y != DEADZONE){
-			if ((cur_line + cur_dir_y) >= 2 && (cur_line + cur_dir_y) <= max_line){	
+			if ((cur_line + cur_dir_y) >= LINE_3 && (cur_line + cur_dir_y) <= max_line){	
 				OLED_goto_line(cur_line);
 				OLED_store_sym(' ');
 				OLED_goto_line(cur_line += cur_dir_y);
@@ -83,7 +82,7 @@ OLED_line fsm_menuNavigate(OLED_line max_line){
 	}
 }
 
-//Loop until button press with spam prevention
+//Loop until button press
 void fsm_Return(void){
 	uint8_t last_state_button = 1;
 	while(1){

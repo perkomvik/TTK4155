@@ -6,19 +6,12 @@
  */ 
 
 
-#include "Memory.h"
+#include "memory.h"
 
-#include <stdlib.h>
 
 void memory_init(void){
 	set_bit(MCUCR,SRE); // Enable external memory
-	set_bit(EMCUCR,2); // Setting wait state: wait two cycles. Is this needed?
-	//set_bit(EMCUCR,3);
-	//set_bit(SFIOR,XMM2);
-	//set_bit(EMCUCR, SRL2);
-	//set_bit(EMCUCR, SRW01);
-	//set_bit(EMCUCR, SRW00);
-	
+	set_bit(EMCUCR,SRW00); // Wait one cycle
 }
 
 void SRAM_test(void){

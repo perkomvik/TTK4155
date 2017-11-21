@@ -8,8 +8,6 @@
 
 #include "pong.h"
 
-
-	
 typedef struct Highscores_template{
 	char* name;
 	uint8_t score;
@@ -96,7 +94,7 @@ void pong_JOY(void){
 			if(results.data[GAME_OVER]){
 				break;
 			}
-			send_all_joy(PONG_INSTR);
+			CAN_send_all_JOY(PONG_INSTR);
 			if(results.data[GOAL]){
 				score++;
 				pong_update_score(score);
@@ -108,8 +106,6 @@ void pong_JOY(void){
 
 }
 
-
-
 void pong_slider(void){
 	pong_init(SLIDER);
 	CAN_msg results;
@@ -120,7 +116,7 @@ void pong_slider(void){
 			if(results.data[GAME_OVER]){
 				break;
 			}
-			send_all_slider(PONG_INSTR); //kan være problematisk å sende dette hvis spillet egt er ferdig
+			CAN_send_all_slider(PONG_INSTR); 
 			if(results.data[GOAL]){
 				score++;
 				pong_update_score(score);
@@ -186,7 +182,6 @@ void pong_place_highscore(char* name, uint8_t score, uint8_t lineNum){
 	}
 	Highscore[lineNum].score = score;
 }
-
 
 void pong_save_highscore(void){
 	unsigned int adr = 0; 

@@ -9,7 +9,7 @@
 #ifndef MEMORY_H_
 #define MEMORY_H_
 
-#include "Utilities.h"
+#include "utilities.h"
 void memory_init(void);
 void SRAM_test(void);
 
