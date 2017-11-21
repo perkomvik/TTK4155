@@ -19,8 +19,6 @@ void motor_init(){
 	// Set direction pin to output
 	set_bit(DDRH, PH1);
 	
-	//--------------------Set encoder pins to output and input mode----------------------//
-	
 	// Enable control for output enable. Remember: active low - !OE
 	set_bit(DDRB, PB5);
 	
@@ -46,9 +44,8 @@ void motor_init(){
 }
 
 
-void motor_set_direction(motor_direction_t direction){
-
-	switch (direction > 127){
+void motor_set_dir(motor_direction_t direction){
+	switch (direction){
 		case(LEFT): // LEFT is 0-127, 121 is selected to have a defined value for the middle
 			clear_bit(PORTH, PH1);
 			break;
@@ -59,21 +56,17 @@ void motor_set_direction(motor_direction_t direction){
 }
 
 void motor_set_speed(uint8_t speed){
-	motor_set_direction(speed);
-	switch (speed > 126){
-		case(LEFT):
-			DAC_send(126-speed);
-			break;
-		case(RIGHT):
-			DAC_send(speed-127);
-			break;
-		default:
-			DAC_send(speed-127);
-			break;
+	if(speed > 126){ //Limits speed based on direction
+		motor_set_dir(RIGHT);
+		DAC_send(speed-127);
+		
+	} else{
+		motor_set_dir(LEFT);
+		DAC_send(126-speed);
 	}
 }
 
-void motor_set_speed_2(uint8_t speed){
+void motor_set_speed_PID(uint8_t speed){
 		DAC_send(speed);
 }
 
@@ -83,7 +76,7 @@ void motor_reset_encoder() {
 	set_bit(PORTH, PH6); // Finish reset
 }
 
-int16_t motor_read_rotation(uint8_t reset_flag){
+int16_t motor_read_rotation(void){
 
 	//Set !OE low to enable output of encoder. Defect PH5, used PB5
 	clear_bit(PORTB, PB5);
@@ -94,7 +87,7 @@ int16_t motor_read_rotation(uint8_t reset_flag){
 	_delay_us(60);
 	
 	//Read LSB
-	uint8_t low = PINK; //
+	uint8_t low = PINK; 
 	
 	//Set SEL low to get high byte
 	clear_bit(PORTH, PH3);
@@ -103,10 +96,6 @@ int16_t motor_read_rotation(uint8_t reset_flag){
 	
 	//Read MSB
 	uint8_t high = PINK;
-
-	if (reset_flag) {
-		motor_reset_encoder();
-	}
 
 	//Set !OE high to disable output of encoder
 	set_bit(PORTB, PB5);
@@ -117,5 +106,5 @@ int16_t motor_read_rotation(uint8_t reset_flag){
 }
 
 motor_encoder_test(void){
-	printf("Encoder: %d\n", motor_read_rotation(0));
+	printf("Encoder: %d\n", motor_read_rotation());
 }

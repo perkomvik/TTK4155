@@ -21,7 +21,7 @@ main.d main.o: .././main.c \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  .././USART.h .././memory.h .././Utilities.h .././ADC.h .././joystick.h \
  .././OLED.h .././CAN.h .././MCP2515.h .././SPI.h .././CAN_joystick.h \
- .././pong.h .././EEPROM.h .././menus.h
+ .././pong.h .././menus.h .././EEPROM.h
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -87,6 +87,6 @@ d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
 .././pong.h:
 
-.././EEPROM.h:
-
 .././menus.h:
+
+.././EEPROM.h:

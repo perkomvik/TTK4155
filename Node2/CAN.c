@@ -60,7 +60,6 @@ void CAN_print(CAN_message* msg){
 	printf("\n");
 }
 
-ISR(INT2_vect) //interrupt handler
-{
+ISR(INT2_vect){
 	CAN_int_flag = 1;
 }

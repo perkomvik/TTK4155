@@ -71,22 +71,19 @@ void mcp2515_bit_modify(uint8_t regist, uint8_t mask, uint8_t cData){
 }
 
 uint8_t mcp2515_init(uint8_t mode){
-	uint8_t mode_value;
+	uint8_t cur_mode;
 	SPI_MasterInit(); // Initialize SPI
 	mcp2515_reset(); // Send reset-command
 	
-	mode_value = mcp2515_read(MCP_CANSTAT); // Read current mode
-	if((mode_value& MODE_MASK)  != MODE_CONFIG) {
-		return 1;
+	cur_mode = mcp2515_read(MCP_CANSTAT); 
+	if((cur_mode& MODE_MASK)  != MODE_CONFIG) { //Check if reset properly
+		return 1; //Mode error 
 	}
-	else{
-	}
-
 	mcp2515_set_mode(mode);
-	mode_value = mcp2515_read(MCP_CANSTAT);
-	int mode_bits = (mode_value & MODE_MASK);
+	cur_mode = mcp2515_read(MCP_CANSTAT);
+	int mode_bits = (cur_mode & MODE_MASK);
 	if(mode_bits != mode){ // Check if chosen mode is the same as current mode
-		return 1;
+		return 1; //Mode error 
 	}
 	mcp2515_write(MCP_CANINTE, MCP_RX_INT); // Enable interrupt
 	return 0;

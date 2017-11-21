@@ -25,8 +25,8 @@ void pong_JOY(void){
 	CAN_message results;
 	results.id = PONG_RESULT;
 	results.length = 2;
-	results.data[0] = 0;
-	results.data[1] = 0;
+	results.data[GAME_OVER] = 0;
+	results.data[GOAL] = 0;
 	
 	IR_calibrate();
 	
@@ -34,20 +34,21 @@ void pong_JOY(void){
 	CAN_message_send(&results);
 	
 	while(!game_over){
-		results.data[1] = is_goal();
+		IR_MM();
+		results.data[GOAL] = is_goal();
 		if(CAN_receive(&instructions)){
-			motor_set_speed(instructions.data[0]);
-			//set_servo(instructions.data[1]);
+			motor_set_speed(instructions.data[JOY_X]);
+			//set_servo(instructions.data[JOY_Y]);
 			set_servo(127);
-			solenoid_fire(instructions.data[2]);
+			solenoid_fire(instructions.data[JOY_B]);
 			_delay_ms(10); // Needed for solenoid disturbance
 			CAN_message_send(&results);
 		}
 		
 		game_over = is_game_over();
 	}
-	results.data[0] = game_over;
-	CAN_print(&results);
+	results.data[GAME_OVER] = game_over;
+	motor_set_speed(STOP);
 	CAN_message_send(&results);
 }
 
@@ -59,8 +60,9 @@ void pong_slider(void){
 	CAN_message results;
 	results.id = PONG_RESULT;
 	results.length = 2;
-	results.data[0] = 0;
-	results.data[1] = 0;
+	results.data[GAME_OVER] = 0;
+	results.data[GOAL] = 0;
+
 	
 	PID_calibrate();
 	IR_calibrate();
@@ -69,21 +71,20 @@ void pong_slider(void){
 	CAN_message_send(&results);
 	
 	while(!game_over){
-		results.data[1] = is_goal();
+		IR_MM();
+		results.data[GOAL] = is_goal();
 		if(CAN_receive(&instructions)){
-			//CAN_print(&instructions);
-			PID(instructions.data[1]);
-			set_servo(instructions.data[0]);
-			solenoid_fire(instructions.data[2]);
-			_delay_ms(10);
+			PID(instructions.data[SLIDER]);
+			set_servo(instructions.data[JOY_X]);
+			solenoid_fire(instructions.data[JOY_B]);
+			_delay_ms(10); // Needed for solenoid disturbance
 			CAN_message_send(&results);
 		}
 		game_over = is_game_over();
 	}
 	
-	results.data[0] = game_over;
-	motor_set_speed(127);
-	CAN_print(&results);
+	results.data[GAME_OVER] = game_over;
+	motor_set_speed(STOP);
 	CAN_message_send(&results);
 }
 

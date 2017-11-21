@@ -12,13 +12,12 @@
 #include "utilities.h"
 #include "motor.h"
 
+//Tuned PID gains
 #define Kp 1
 #define Ki 10
 #define Kd 0.01
+
 #define dt 0.016
-//#define Kp 1
-//#define Ki 0.5
-//#define Kd 0.03
 
 static int16_t rot_max;
 static int16_t rot_min = 0;

@@ -17,7 +17,7 @@
 #include "pong.h"
 
 int main(void){	
-	USART_Init();
+	USART_init();
 	DAC_init();
 	motor_init();
 	PID_init();

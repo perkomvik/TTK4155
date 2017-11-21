@@ -18,9 +18,8 @@ pong.d pong.o: .././pong.c .././pong.h .././utilities.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
- .././EEPROM.h .././CAN_joystick.h .././Utilities.h .././joystick.h \
- .././CAN.h .././MCP2515.h .././SPI.h .././OLED.h .././fsm.h .././USART.h \
- .././memory.h .././ADC.h .././menus.h
+ .././CAN_joystick.h .././Utilities.h .././joystick.h .././CAN.h \
+ .././MCP2515.h .././SPI.h .././OLED.h .././menus.h .././EEPROM.h
 
 .././pong.h:
 
@@ -64,8 +63,6 @@ d:\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
-.././EEPROM.h:
-
 .././CAN_joystick.h:
 
 .././Utilities.h:
@@ -80,12 +77,6 @@ d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
 .././OLED.h:
 
-.././fsm.h:
-
-.././USART.h:
-
-.././memory.h:
-
-.././ADC.h:
-
 .././menus.h:
+
+.././EEPROM.h:

@@ -10,8 +10,8 @@
 #define USART_H_
 
 #include "utilities.h"
-void USART_Init(void);
-int USART_Transmit(unsigned char data);
-int USART_Receive( void );
+void USART_init(void);
+int USART_transmit(unsigned char data);
+int USART_receive( void );
 
 #endif /* USART_H_ */

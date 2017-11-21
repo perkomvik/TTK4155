@@ -9,7 +9,7 @@
 #include "ADC.h"
 
 void JOY_init(void){
-	set_bit(PORTD, PIND5); // Set pin to input
+	set_bit(PORTD, PIND5); // Source button input, Pull up
 }
 
 

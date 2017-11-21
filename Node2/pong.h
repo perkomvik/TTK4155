@@ -18,10 +18,23 @@
 #include "solenoid.h"
 #include "PID.h"
 
+#define STOP 127
+
 typedef enum tag_game_mode{
 	JOY = 0,
 	SLIDER = 1
 }game_mode;
+
+typedef enum tag_game_instructions{
+	JOY_X = 0,
+	JOY_Y = 1,
+	JOY_B = 2
+}game_instructions;
+
+typedef enum tag_game_results{
+	GAME_OVER = 0,
+	GOAL = 1,
+}game_results;
 
 
 void pong_play(game_mode mode);

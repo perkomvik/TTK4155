@@ -22,8 +22,7 @@ void ADC_init(void){
 }
 
 uint16_t ADC_read(void){
-	// Channel 0 is default
-	set_bit(ADCSRA, ADSC); // Start single conversion, takes 13 adc clokc cycles
+	set_bit(ADCSRA, ADSC); // Start single conversion
 	loop_until_bit_is_set(ADCSRA, ADIF); // Wait for interrupt flag to be set
 	uint8_t data_low = ADCL; // Low data bits of converted data
 	uint16_t data_high = ADCH; // High data bits of converted data
@@ -31,13 +30,13 @@ uint16_t ADC_read(void){
 	return data;
 }
 
-uint16_t ADC_read_channel(uint8_t channel){
+uint16_t ADC_read_channel(ADC_channel channel){
 	switch(channel){
-		case(0):
-			clear_bit(ADMUX,MUX0); // Choose channel 0
+		case(CHANNEL_0):
+			clear_bit(ADMUX,MUX0);
 			return ADC_read();
-		case(1):
-			set_bit(ADMUX,MUX0); // Choose channel 1
+		case(CHANNEL_1):
+			set_bit(ADMUX,MUX0); 
 			return ADC_read();
 		default:
 			return 0;

@@ -7,10 +7,8 @@
 
 
 #include "pong.h"
-#include "CAN_joystick.h"
-#include "OLED.h"
-#include "fsm.h"
-//static uint8_t highscore[6] = {0};
+
+
 	
 typedef struct Highscores_template{
 	char* name;
@@ -37,7 +35,6 @@ void pong_update_score(uint8_t score){
 	OLED_store_str(myScore);
 	for (i = 0; (Highscore[i].score >= score && i < 6); i++){
 		_delay_us(10);
-	//printf("i: %d\n",i);
 	}
 	if(i != 6 ){
 		OLED_clear_line(6);
@@ -48,11 +45,9 @@ void pong_update_score(uint8_t score){
 	OLED_refresh();
 }
 void pong_init(game_mode mode){	
-	//send game mode instruction to node 2
-	
 	
 	CAN_msg mode_msg;
-	mode_msg.id = PONG_START; //id 0 means game_mode
+	mode_msg.id = PONG_START; 
 	mode_msg.length = 1;
 	mode_msg.data[0] = mode;
 	CAN_message_send(&mode_msg);
@@ -98,11 +93,11 @@ void pong_JOY(void){
 	while (1){
 		
 		if(CAN_receive(&results)){
-			if(results.data[0]){
+			if(results.data[GAME_OVER]){
 				break;
 			}
-			send_all_joy(PONG_INSTR); //kan være problematisk å sende dette hvis spillet egt er ferdig
-			if(results.data[1]){
+			send_all_joy(PONG_INSTR);
+			if(results.data[GOAL]){
 				score++;
 				pong_update_score(score);
 			}
@@ -110,8 +105,7 @@ void pong_JOY(void){
 	}
 	OLED_game_over_screen();
 	pong_update_highscore(score);
-	pong_print_highscore();
-	fsm_evPong();
+
 }
 
 
@@ -123,11 +117,11 @@ void pong_slider(void){
 	
 	while (1){
 		if(CAN_receive(&results)){
-			if(results.data[0]){
+			if(results.data[GAME_OVER]){
 				break;
 			}
 			send_all_slider(PONG_INSTR); //kan være problematisk å sende dette hvis spillet egt er ferdig
-			if(results.data[1]){
+			if(results.data[GOAL]){
 				score++;
 				pong_update_score(score);
 			}
@@ -135,8 +129,7 @@ void pong_slider(void){
 	}
 	OLED_game_over_screen();
 	pong_update_highscore(score);
-	pong_print_highscore();
-	fsm_evPong();
+
 }
 
 void pong_print_highscore(void){
@@ -154,7 +147,6 @@ void pong_print_highscore(void){
 		OLED_store_str(str_num);
 	}
 	OLED_refresh();
-	fsm_Return();
 }
 
 void pong_update_highscore(uint8_t score){
@@ -172,11 +164,7 @@ void pong_get_highscore_line(uint8_t score, uint8_t lineNum){
 	OLED_store_menu(CONGRATULATIONS_MENU);
 	OLED_refresh();
 	char buffer[10];
-	//sprintf(name2,"%s", buffer);
-	print_struct();
 	scanf("%s",buffer);
-
-	
 	pong_place_highscore(buffer,score,lineNum);
 	
 }
@@ -188,7 +176,7 @@ void pong_place_highscore(char* name, uint8_t score, uint8_t lineNum){
 		}
 		Highscore[i].score = Highscore[i-1].score; 
 	}
-	printf("I will overwrite this: %s\n", Highscore[lineNum].name);
+	//Can not directly copy from scanf buffer
 	char buffer[10] = "          ";
 	for(int i = 0;  name[i] != '\0'; i++){
 		buffer[i] = name[i];
@@ -196,9 +184,7 @@ void pong_place_highscore(char* name, uint8_t score, uint8_t lineNum){
 	for(int i = 0;  i < 10; i++){
 		Highscore[lineNum].name[i] = buffer[i];
 	}
-	
 	Highscore[lineNum].score = score;
-	print_struct();
 }
 
 
@@ -229,7 +215,7 @@ void pong_highscore_init(void){
 	pong_load_highscore();
 }
 
-void print_struct(void){
+void print_highscore_struct(void){
 	for (uint8_t i = 0; i < 6; i++){
 		printf("%s\t", Highscore[i].name);
 	}
