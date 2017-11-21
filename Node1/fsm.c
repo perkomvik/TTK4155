@@ -15,9 +15,8 @@ fsm_state fsm_getCurrentState(void){
 
 void fsm_evInit(void){
 	USART_Init();
-	init_memory();
+	memory_init();
 	_delay_us(100); //NEEDED?
-	//SRAM_test();
 	JOY_init();
 	OLED_init();
 	CAN_init(MODE_NORMAL);
@@ -42,7 +41,6 @@ void fsm_evPong(void){
 void fsm_evSnek(void){
 	OLED_clear();
 	OLED_store_menu(SNEK_MENU);
-	snek();
 	OLED_refresh();
 	currentState = STATE_SNEK;
 }
@@ -55,14 +53,14 @@ void fsm_evThanksTo(void){
 }
 
 OLED_line fsm_menuNavigate(OLED_line max_line){
-	JOY_dir_y prev_dir_y = UNDEFINED;
+	JOY_dir_y prev_dir_y = DEADZONE;
 	JOY_dir_y cur_dir_y;
 	uint8_t last_state_button = 1;
 	uint8_t cur_state_button;
 	OLED_line cur_line = LINE_3;
 	while(1){
 		cur_dir_y = JOY_get_dir_y();
-		if (prev_dir_y == MIDDLE && cur_dir_y != MIDDLE && cur_dir_y != UNDEFINED){
+		if (prev_dir_y == MIDDLE && cur_dir_y != MIDDLE && cur_dir_y != DEADZONE){
 			if ((cur_line + cur_dir_y) >= 2 && (cur_line + cur_dir_y) <= max_line){	
 				OLED_goto_line(cur_line);
 				OLED_store_sym(' ');
@@ -72,7 +70,7 @@ OLED_line fsm_menuNavigate(OLED_line max_line){
 			}	
 		}
 		//Saturation for direction of y
-		if(cur_dir_y != UNDEFINED){
+		if(cur_dir_y != DEADZONE){
 			prev_dir_y = cur_dir_y;
 		}
 		//Prevent spamming presses across states
@@ -85,7 +83,7 @@ OLED_line fsm_menuNavigate(OLED_line max_line){
 	}
 }
 
-//Loop until button press with spam protection
+//Loop until button press with spam prevention
 void fsm_Return(void){
 	uint8_t last_state_button = 1;
 	while(1){

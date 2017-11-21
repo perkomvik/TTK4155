@@ -6,14 +6,7 @@
  */ 
 #include "EEPROM.h"
 
-void EEPROM_init(void){
-	
-	
-	
-}
-
-void EEPROM_write(unsigned int uiAddress, unsigned char ucData)
-{
+void EEPROM_write(unsigned int uiAddress, unsigned char ucData){
 	/* Wait for completion of previous write */
 	while(EECR & (1<<EEWE))
 	;
@@ -26,8 +19,7 @@ void EEPROM_write(unsigned int uiAddress, unsigned char ucData)
 	EECR |= (1<<EEWE);
 }
 
-unsigned char EEPROM_read(unsigned int uiAddress)
-{
+unsigned char EEPROM_read(unsigned int uiAddress){
 	/* Wait for completion of previous write */
 	while(EECR & (1<<EEWE))
 	;

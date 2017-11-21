@@ -34,7 +34,7 @@ uint8_t JOY_get_x(void){
 
 uint8_t JOY_get_y(void){
 	uint8_t y = ADC_read(CHANNEL_2);
-	if (y > 145 || y < 123){
+	if (y > 145 || y < 115){
 		return y;
 	}
 	else {
@@ -48,11 +48,11 @@ JOY_dir_y JOY_get_dir_y(void){
 		return DOWN;
 	} else if (y > 250){
 		return UP;
-	} else if (y < 134 && y > 124){
+	} else if (y < 145 && y > 115){
 		return MIDDLE;
 	}
-	else{
-		return UNDEFINED; 
+	else{ 
+		return DEADZONE; //dead zone for y = 5-115 || 145-250 
 	}
 }
 

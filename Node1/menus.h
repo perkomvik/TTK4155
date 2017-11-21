@@ -1,3 +1,5 @@
+// ¤ is used as key for a line of whitespace to save data memory
+
 #define MAIN_MENU \
 	"   MAIN MENU    "\
 	"¤"\

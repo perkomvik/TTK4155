@@ -10,7 +10,7 @@
 
 #include <stdlib.h>
 
-void init_memory(void){
+void memory_init(void){
 	set_bit(MCUCR,SRE); // Enable external memory
 	set_bit(EMCUCR,2); // Setting wait state: wait two cycles. Is this needed?
 	//set_bit(EMCUCR,3);

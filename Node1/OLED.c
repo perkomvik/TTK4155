@@ -34,19 +34,14 @@ void OLED_init(void){
 	*OLED_C = 0xa4;        // Out  follows  RAM  content
 	*OLED_C = 0xa6;        // Set  normal  display
 	*OLED_C = 0xaf;        // Display  on
-	
-	//SRAM BUFFER INITIALIZE, needed?
-	uint16_t volatile* sram_pointer;
-	for (int b = 0; b < N_OLED_BYTES; b++){
-		sram_pointer = (uint16_t *) (SRAM_MEM_ADR + b);
-		*sram_pointer = ' ';
-	}
 }
 
 void OLED_home(void){ // Puts cursor at upper left corner of OLED
+	//OLED cursor
 	*OLED_C = 0xb0;
 	*OLED_C = 0x10;
 	*OLED_C = 0x00;
+	//SRAM buffer cursor
 	cursor = 0;
 }
 
@@ -54,21 +49,21 @@ void OLED_goto_line(OLED_line line){ // Puts cursor at start of selected line
 	*OLED_C = 0xb0 + line;
 	*OLED_C = 0x10;
 	*OLED_C = 0x00;
+
 	cursor = N_OLED_LINE_BYTES*line;
 }
 
-void OLED_clear_line(OLED_line line){ // Clears selected line by filling with whitespace
+void OLED_clear_line(OLED_line line){ // "Clears" selected line by filling with whitespace
 	cursor = N_OLED_LINE_BYTES*line;
-	uint8_t volatile* sram_pointer;
+	uint8_t volatile* sram_pointer = (uint8_t *) (SRAM_MEM_ADR);
 	for (uint8_t b = 0; b < N_OLED_LINE_BYTES; b++){
-		sram_pointer = (uint8_t *) (SRAM_MEM_ADR + cursor);
-		*sram_pointer = ' '; // whitespace
+		sram_pointer[cursor] = ' '; // whitespace
 		cursor++;
 	}
 
 }
 
-void OLED_clear(void){ // Clears display by filling with whitespace
+void OLED_clear(void){ // "Clears" buffer by filling with whitespace
 	for (OLED_line line = LINE_1; line < N_OLED_LINES; line++){
 		OLED_clear_line(line);
 	}
@@ -80,18 +75,17 @@ void OLED_pos(uint8_t row, uint8_t column){ // Puts cursor at selected coordinat
 }
 
 void OLED_fill(void){ // Fills the display by turning on every pixel
-	uint8_t volatile* sram_pointer;
+	uint8_t volatile* sram_pointer = (uint8_t *)(SRAM_MEM_ADR);
 	for (OLED_line line = 0; line < N_OLED_LINES; line++){
 		OLED_goto_line(line);
 		for (uint8_t b = 0; b < N_OLED_LINE_BYTES; b++){
-			sram_pointer = (uint8_t *)(SRAM_MEM_ADR + cursor);
-			*sram_pointer = FULLWHITE;
+			sram_pointer[cursor] = FULLWHITE;
 			cursor++;
 		}
 	}
 }
 
-void OLED_load_sym(char symbol){ // Print symbol to OLED
+void OLED_load_sym(char symbol){ // Loads a single char from SRAM buffer to OLED
 	if (symbol >= 31){
 		for (uint8_t b = 0; b < 8; b++){
 			*OLED_D = pgm_read_byte(&font8[symbol-31][b]);
@@ -99,40 +93,36 @@ void OLED_load_sym(char symbol){ // Print symbol to OLED
 	}
 }
 
-void OLED_store_str(char* string){ // Stores string in SRAM to be printed to OLED
+void OLED_store_str(char* string){ // Stores string in SRAM buffer
 	uint8_t str_index = 0;
-	uint8_t volatile* sram_pointer;
+	uint8_t volatile* sram_pointer = (uint8_t *)(SRAM_MEM_ADR);
 	while (string[str_index] != '\0'){
 		if (cursor < N_OLED_BYTES){
-			sram_pointer = (uint8_t *)(SRAM_MEM_ADR + cursor);
-			*sram_pointer = string[str_index];
+			sram_pointer[cursor] = string[str_index];
 		}
 		cursor++;
 		str_index++;
 	}
 }
 
-void OLED_store_sym(char symbol){ // Stores symbol in SRAM to be printed to OLED
+void OLED_store_sym(char symbol){ // Stores symbol in SRAM buffer
 	if (symbol >= 31){
-		uint8_t volatile* sram_pointer = (uint8_t *)(SRAM_MEM_ADR + cursor);
-		*sram_pointer = symbol;
+		uint8_t volatile* sram_pointer = (uint8_t *)(SRAM_MEM_ADR);
+		sram_pointer[cursor] = symbol;
 		cursor++;
 	}
 }
 
 void OLED_refresh(void){ // Prints the full screen from SRAM to OLED
 	OLED_home();
-	uint8_t volatile* sram_pointer;
+	uint8_t volatile* sram_pointer = (uint8_t *)(SRAM_MEM_ADR);
 	char symbol;
 	OLED_line line = LINE_1;
 	for (int b = 0; b < N_OLED_BYTES; b++){
-		sram_pointer = (uint8_t *)(SRAM_MEM_ADR + b);
-		symbol = *sram_pointer;
-		//printf("%c", b);
+		symbol = sram_pointer[b];
 		if (!(b % N_OLED_LINE_BYTES) && b != 0){
 			line++;
-			OLED_goto_line(line);
-			//printf("\n");
+			OLED_goto_line(line);		
 		}
 		OLED_load_sym(symbol);
 	}
@@ -143,13 +133,12 @@ uint8_t get_cursor(void){ // Get current cursor position
 	return cursor;
 }
 
-void OLED_print(void){ // Prints what is currently on the OLED.
-	OLED_home();
+void OLED_print_buffer(void){ // Prints what is currently in the SRAM buffer to terminal.
+	uint8_t volatile* sram_pointer = (uint8_t *)(SRAM_MEM_ADR);
 	char symbol;
 	OLED_line line = LINE_1;
 	for (int b = 0; b < N_OLED_BYTES; b++){
-		uint8_t volatile* sram_pointer = (uint8_t *)(SRAM_MEM_ADR + b);
-		symbol = *sram_pointer;
+		symbol = sram_pointer[b];
 		if (!(b % N_OLED_LINES) && b != 0){
 			line++;
 			OLED_goto_line(line);
@@ -157,22 +146,20 @@ void OLED_print(void){ // Prints what is currently on the OLED.
 		}
 		printf("%c", symbol);
 	}
-	OLED_home();
 }
 
 
-void OLED_store_menu(char* string){ // Stores chosen menu in SRAM to be printed to OLED 
-	cursor = 0;
+void OLED_store_menu(char* string){ // Stores chosen menu in SRAM buffer
+	OLED_home();
 	uint8_t str_index = 0;
-	uint8_t volatile* sram_pointer;
+	uint8_t volatile* sram_pointer = (uint8_t *)(SRAM_MEM_ADR);
 	while (string[str_index] != '\0'){
 		if (cursor < N_OLED_BYTES){
-			sram_pointer = (uint8_t *)(SRAM_MEM_ADR + cursor);
-			if(string[str_index] == '¤'){
-				OLED_clear_line(cursor/N_OLED_LINE_BYTES);
+			if(string[str_index] == '¤'){ // ¤ is used as key for a line of whitespace to save data memory
+				OLED_clear_line(cursor/N_OLED_LINE_BYTES); //Updates cursor in function
 				str_index++;
 			}else{
-				*sram_pointer = string[str_index];
+				sram_pointer[cursor] = string[str_index];
 				str_index++;
 				cursor++;
 			}	
