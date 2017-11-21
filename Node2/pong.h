@@ -9,12 +9,12 @@
 #ifndef PONG_H_
 #define PONG_H_
 
-#include "Utilities.h"
+#include "utilities.h"
 #include "CAN.h"
 #include "servo.h"
 #include "IR.h"
 #include "DAC.h"
-#include "Motor.h"
+#include "motor.h"
 #include "solenoid.h"
 #include "PID.h"
 

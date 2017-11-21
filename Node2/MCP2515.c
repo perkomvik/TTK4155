@@ -6,7 +6,7 @@
  */ 
 
 #include "MCP2515.h"
-#include "SPI.h"
+
 
 uint8_t mcp2515_read(uint8_t address){
 	uint8_t result;
@@ -62,10 +62,10 @@ uint8_t mcp2515_read_status(){
 void mcp2515_bit_modify(uint8_t regist, uint8_t mask, uint8_t cData){
 	PORTB &= ~(1<<PB7); //SelectCAN-controller Chip select
 
-	SPI_send(MCP_BITMOD); // Ready bit modify instruction
-	SPI_send(regist); // Choose register
-	SPI_send(mask); // Send bit mask
-	SPI_send(cData); // Modify the bits to match cData
+	SPI_Send(MCP_BITMOD); // Ready bit modify instruction
+	SPI_Send(regist); // Choose register
+	SPI_Send(mask); // Send bit mask
+	SPI_Send(cData); // Modify the bits to match cData
 
 	PORTB |= (1<<PB7); //Deselect CAN - controller
 }

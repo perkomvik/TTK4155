@@ -4,9 +4,8 @@
  * Created: 18.10.2017 18:39:31
  *  Author: mariuesk
  */ 
-#include <avr/io.h>
-#include<stdio.h>
-#include "Usart_Driver.h"
+
+#include "USART.h"
 
 
 void USART_Init(void){

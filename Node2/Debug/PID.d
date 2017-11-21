@@ -1,4 +1,4 @@
-PID.d PID.o: .././PID.c \
+PID.d PID.o: .././PID.c .././PID.h .././utilities.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -12,15 +12,19 @@ PID.d PID.o: .././PID.c \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././utilities.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h .././PID.h \
- .././motor.h
+ d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
+ .././motor.h .././DAC.h .././TWI_Master.h .././CAN.h .././MCP2515.h \
+ .././SPI.h
+
+.././PID.h:
+
+.././utilities.h:
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -48,8 +52,6 @@ d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
-.././utilities.h:
-
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
@@ -64,6 +66,14 @@ d:\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
-.././PID.h:
-
 .././motor.h:
+
+.././DAC.h:
+
+.././TWI_Master.h:
+
+.././CAN.h:
+
+.././MCP2515.h:
+
+.././SPI.h:

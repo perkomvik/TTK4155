@@ -7,7 +7,7 @@
 
 #include "DAC.h"
 
-void DAC_init() {
+void DAC_init(void) {
 	sei();
 	TWI_Master_Initialise();
 

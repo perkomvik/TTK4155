@@ -1,4 +1,4 @@
-MCP2515.d MCP2515.o: .././MCP2515.c .././MCP2515.h .././Utilities.h \
+MCP2515.d MCP2515.o: .././MCP2515.c .././MCP2515.h .././utilities.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -22,7 +22,7 @@ MCP2515.d MCP2515.o: .././MCP2515.c .././MCP2515.h .././Utilities.h \
 
 .././MCP2515.h:
 
-.././Utilities.h:
+.././utilities.h:
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 

@@ -5,17 +5,11 @@
  *  Author: mariuesk
  */ 
 
-#ifndef F_CPU
-#define F_CPU 16000000UL
-#endif
 
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include "utilities.h"
 
 #include "PID.h"
-#include "motor.h"
+
 
 ISR(TIMER2_OVF_vect){
 	timer_flag = 1;

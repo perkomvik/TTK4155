@@ -14,7 +14,6 @@ void servo_init(uint32_t clock_freq){
 }
 
 void set_servo(uint8_t servo_dir){
-	//printf("servo dir: %d \n", servo_dir);
 	if(servo_dir-37 >= 0){
 		servo_dir -= 37;
 	}
@@ -24,9 +23,8 @@ void set_servo(uint8_t servo_dir){
 	
 	
 	float dir = (float)servo_dir;
-	//printf("Servo_dir: %f\n", dir);
 	float servo_pw = dir/211666.7 + 0.0009;
-	//printf("Servo_pw: %f\n", servo_pw);
+
 	if (servo_pw < min_pw) {
 		servo_pw = min_pw;
 	}

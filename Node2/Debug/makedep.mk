@@ -2,9 +2,9 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-CAN.c
-
 ADC.c
+
+CAN.c
 
 DAC.c
 
@@ -14,11 +14,11 @@ main.c
 
 MCP2515.c
 
-Motor.c
+motor.c
 
 PID.c
 
-Pong.c
+pong.c
 
 PWM.c
 
@@ -30,5 +30,5 @@ SPI.c
 
 TWI_Master.c
 
-Usart_Driver.c
+USART.c
 

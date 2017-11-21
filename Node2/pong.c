@@ -4,7 +4,7 @@
  * Created: 18.11.2017 11:58:59
  *  Author: mariuesk
  */ 
-#include "Pong.h"
+#include "pong.h"
 
 void pong_play(game_mode mode){
 	switch(mode){
@@ -86,15 +86,4 @@ void pong_slider(void){
 	CAN_print(&results);
 	CAN_message_send(&results);
 }
-////CAN_print(&msg);
-//motor_set_direction(msg.data[1]);
-//motor_set_speed(msg.data[1]);
-////PID_update_pos_ref(msg.data[1]);
-////PID();
-//////encoder = motor_read_rotation(0);
-//////ready.data[1] = encoder;
-//////printf("Encoder: %d\n",encoder);
-//set_servo(msg.data[0]);
-//solenoid_fire(msg.data[2]);
-//_delay_ms(10);
-//CAN_message_send(&ready);
+

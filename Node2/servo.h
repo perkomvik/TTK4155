@@ -8,7 +8,7 @@
 
 #ifndef SERVO_H_
 #define SERVO_H_
-#include "Utilities.h"
+#include "utilities.h"
 #include "PWM.h"
 void servo_init(uint32_t clock_freq);
 void set_servo(uint8_t servo_dir);

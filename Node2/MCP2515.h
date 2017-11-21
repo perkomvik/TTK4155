@@ -10,8 +10,9 @@
 #define MCP2515_H_
 
 
-#include "Utilities.h"
-#include <util/delay.h>
+#include "utilities.h"
+#include "SPI.h"
+
 uint8_t mcp2515_read(uint8_t address);
 void mcp2515_write(uint8_t address, uint8_t cData);
 void mcp2515_set_mode(uint8_t mode);

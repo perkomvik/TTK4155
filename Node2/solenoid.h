@@ -8,7 +8,7 @@
 
 #ifndef SOLENOID_H_
 #define SOLENOID_H_
-#include "Utilities.h"
+#include "utilities.h"
 
 void solenoid_init(void);
 void solenoid_fire(uint8_t button);

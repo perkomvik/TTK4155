@@ -6,19 +6,18 @@
  */ 
 
 
-#include "Usart_Driver.h"
+#include "USART.h"
 #include "CAN.h"
 #include "servo.h"
 #include "IR.h"
 #include "DAC.h"
-#include "Motor.h"
+#include "motor.h"
 #include "solenoid.h"
 #include "PID.h"
-#include "Pong.h"
+#include "pong.h"
 
 int main(void){	
 	USART_Init();
-	//printf("hei\n");
 	DAC_init();
 	motor_init();
 	PID_init();
@@ -28,9 +27,7 @@ int main(void){
 	solenoid_init();
 	CAN_message msg;
 	while(1){	
-		
 		if(CAN_receive(&msg)){
-			//CAN_print(&msg);
 			if (msg.id==PONG_START){
 				pong_play(msg.data[0]);
 			}

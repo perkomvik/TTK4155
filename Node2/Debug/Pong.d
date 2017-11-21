@@ -1,4 +1,4 @@
-Pong.d Pong.o: .././Pong.c .././Pong.h .././Utilities.h \
+pong.d pong.o: .././pong.c .././pong.h .././utilities.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -19,12 +19,12 @@ Pong.d Pong.o: .././Pong.c .././Pong.h .././Utilities.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h .././CAN.h \
- .././MCP2515.h .././servo.h .././PWM.h .././IR.h .././ADC.h .././DAC.h \
- .././TWI_Master.h .././Motor.h .././solenoid.h .././PID.h
+ .././MCP2515.h .././SPI.h .././servo.h .././PWM.h .././IR.h .././ADC.h \
+ .././DAC.h .././TWI_Master.h .././motor.h .././solenoid.h .././PID.h
 
-.././Pong.h:
+.././pong.h:
 
-.././Utilities.h:
+.././utilities.h:
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -70,6 +70,8 @@ d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
 .././MCP2515.h:
 
+.././SPI.h:
+
 .././servo.h:
 
 .././PWM.h:
@@ -82,7 +84,7 @@ d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
 .././TWI_Master.h:
 
-.././Motor.h:
+.././motor.h:
 
 .././solenoid.h:
 

@@ -9,6 +9,10 @@
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
+#include "utilities.h"
+#include "DAC.h"
+#include "CAN.h"
+
 typedef enum {LEFT, RIGHT} motor_direction_t;
 
 void motor_init();

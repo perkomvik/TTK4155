@@ -9,6 +9,9 @@
 #ifndef PID_H_
 #define PID_H_
 
+#include "utilities.h"
+#include "motor.h"
+
 #define Kp 1
 #define Ki 10
 #define Kd 0.01

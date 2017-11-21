@@ -37,21 +37,21 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../CAN.c \
 ../ADC.c \
+../CAN.c \
 ../DAC.c \
 ../IR.c \
 ../main.c \
 ../MCP2515.c \
-../Motor.c \
+../motor.c \
 ../PID.c \
-../Pong.c \
+../pong.c \
 ../PWM.c \
 ../servo.c \
 ../solenoid.c \
 ../SPI.c \
 ../TWI_Master.c \
-../Usart_Driver.c
+../USART.c
 
 
 PREPROCESSING_SRCS += 
@@ -61,72 +61,72 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-CAN.o \
 ADC.o \
+CAN.o \
 DAC.o \
 IR.o \
 main.o \
 MCP2515.o \
-Motor.o \
+motor.o \
 PID.o \
-Pong.o \
+pong.o \
 PWM.o \
 servo.o \
 solenoid.o \
 SPI.o \
 TWI_Master.o \
-Usart_Driver.o
+USART.o
 
 OBJS_AS_ARGS +=  \
-CAN.o \
 ADC.o \
+CAN.o \
 DAC.o \
 IR.o \
 main.o \
 MCP2515.o \
-Motor.o \
+motor.o \
 PID.o \
-Pong.o \
+pong.o \
 PWM.o \
 servo.o \
 solenoid.o \
 SPI.o \
 TWI_Master.o \
-Usart_Driver.o
+USART.o
 
 C_DEPS +=  \
-CAN.d \
 ADC.d \
+CAN.d \
 DAC.d \
 IR.d \
 main.d \
 MCP2515.d \
-Motor.d \
+motor.d \
 PID.d \
-Pong.d \
+pong.d \
 PWM.d \
 servo.d \
 solenoid.d \
 SPI.d \
 TWI_Master.d \
-Usart_Driver.d
+USART.d
 
 C_DEPS_AS_ARGS +=  \
-CAN.d \
 ADC.d \
+CAN.d \
 DAC.d \
 IR.d \
 main.d \
 MCP2515.d \
-Motor.d \
+motor.d \
 PID.d \
-Pong.d \
+pong.d \
 PWM.d \
 servo.d \
 solenoid.d \
 SPI.d \
 TWI_Master.d \
-Usart_Driver.d
+USART.d
 
 OUTPUT_FILE_PATH +=Node2.elf
 

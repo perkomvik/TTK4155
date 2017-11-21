@@ -5,14 +5,10 @@
  *  Author: mariuesk
  */ 
 
-#define F_CPU 16000000UL
 
-#include <avr/io.h>
-#include <util/delay.h>
 
-#include "Motor.h"
-#include "DAC.h"
-#include "CAN.h"
+#include "motor.h"
+
 
 void motor_init(){
 	
@@ -52,7 +48,7 @@ void motor_init(){
 
 void motor_set_direction(motor_direction_t direction){
 
-	switch (direction > 121){
+	switch (direction > 127){
 		case(LEFT): // LEFT is 0-127, 121 is selected to have a defined value for the middle
 			clear_bit(PORTH, PH1);
 			break;

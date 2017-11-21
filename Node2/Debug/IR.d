@@ -1,4 +1,4 @@
-IR.d IR.o: .././IR.c .././IR.h .././Utilities.h \
+IR.d IR.o: .././IR.c .././IR.h .././utilities.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -22,7 +22,7 @@ IR.d IR.o: .././IR.c .././IR.h .././Utilities.h \
 
 .././IR.h:
 
-.././Utilities.h:
+.././utilities.h:
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 

@@ -6,7 +6,7 @@
  */ 
 
 #include "SPI.h"
-#include "Utilities.h"
+
 void SPI_MasterInit(){
 
 	DDRB |= (1<<DDB0)|(1<< DDB7)|(1<<DDB1)|(1<<DDB2); // Set MOSI, SCK and SS output, all others input 

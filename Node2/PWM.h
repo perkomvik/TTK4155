@@ -9,7 +9,7 @@
 #ifndef PWM_H_
 #define PWM_H_
 
-#include "Utilities.h"
+#include "utilities.h"
 void PWM_init(float period, uint32_t clock_freq);
 void PWM_set_period(float period);
 void PWM_pulse_set(float width);

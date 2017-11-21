@@ -6,12 +6,12 @@
  */ 
 
 
-#ifndef USART_DRIVER_H_
-#define USART_DRIVER_H_
+#ifndef USART_H_
+#define USART_H_
 
-#include "Utilities.h"
+#include "utilities.h"
 void USART_Init(void);
 int USART_Transmit(unsigned char data);
 int USART_Receive( void );
 
-#endif /* USART_DRIVER_H_ */
+#endif /* USART_H_ */

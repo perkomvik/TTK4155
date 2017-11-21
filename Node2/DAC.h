@@ -9,9 +9,9 @@
 #ifndef DAC_H_
 #define DAC_H_
 
-#include "Utilities.h"
+#include "utilities.h"
 #include "TWI_Master.h"
-void DAC_init();
+void DAC_init(void);
 void DAC_send(uint8_t data);
 
 

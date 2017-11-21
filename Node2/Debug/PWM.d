@@ -1,4 +1,4 @@
-PWM.d PWM.o: .././PWM.c .././PWM.h .././Utilities.h \
+PWM.d PWM.o: .././PWM.c .././PWM.h .././utilities.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -22,7 +22,7 @@ PWM.d PWM.o: .././PWM.c .././PWM.h .././Utilities.h \
 
 .././PWM.h:
 
-.././Utilities.h:
+.././utilities.h:
 
 d:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
