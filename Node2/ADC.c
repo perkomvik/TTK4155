@@ -17,16 +17,16 @@ void ADC_init(void){
 	set_bit(ADCSRA, ADPS1);
 	set_bit(ADCSRA, ADPS2);
 	// Set voltage reference to 2.56V
-	set_bit(ADMUX,REFS1);
-	set_bit(ADMUX,REFS0);
+	set_bit(ADMUX, REFS1);
+	set_bit(ADMUX, REFS0);
 }
 
 uint16_t ADC_read(void){
 	// Channel 0 is default
 	set_bit(ADCSRA, ADSC); // Start single conversion, takes 13 adc clokc cycles
 	loop_until_bit_is_set(ADCSRA, ADIF); // Wait for interrupt flag to be set
-	uint8_t data_low = ADCL; // Low data bits of coverted data
-	uint16_t data_high = ADCH; // High data bits of coverted data
+	uint8_t data_low = ADCL; // Low data bits of converted data
+	uint16_t data_high = ADCH; // High data bits of converted data
 	uint16_t data = (data_high << 8)|(data_low); // Combining low and high
 	return data;
 }

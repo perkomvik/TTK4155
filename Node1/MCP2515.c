@@ -89,7 +89,7 @@ uint8_t mcp2515_init(uint8_t mode){
 	}
 	
 	mcp2515_set_mode(mode);
-	mode_value = mcp2515_read(MCP_CANSTAT); // Same as above. Needed?
+	mode_value = mcp2515_read(MCP_CANSTAT);
 	int mode_bits = (mode_value & MODE_MASK);
 	if(mode_bits != mode){ // Check if chosen mode is the same as current mode
 		printf("MCP2515 is NOT in correct mode after reset! Its config bits are %x\n", mode_bits);

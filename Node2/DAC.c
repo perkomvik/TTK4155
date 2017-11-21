@@ -14,8 +14,8 @@ void DAC_init() {
 }
 
 void DAC_send(uint8_t data){
-	uint8_t address = 0b01010000;
-	uint8_t command = 0b0;
+	uint8_t address = 0b01010000; // Set slave address
+	uint8_t command = 0b0; // Setting DAC0 output
 	
 	uint8_t message[3];
 	message[0] = address;

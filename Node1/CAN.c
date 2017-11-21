@@ -27,6 +27,7 @@ void CAN_message_send(CAN_msg* msg){
 	}
 	mcp2515_request_to_send(MCP_RTS_TX0); // Sends data to TX0 buffer 
 }
+
 uint8_t CAN_receive(CAN_msg* msg){
 	if (CAN_int_flag){
 		uint8_t IDHI = mcp2515_read(MCP_RXB0SIDH); // Read message ID high bits
