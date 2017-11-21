@@ -12,19 +12,19 @@ void PWM_init(float period, uint32_t clock_freq){
 	uint16_t prescaler = 256;
 	
 	//Fast PWM-MODE (mode 14, table 17-2)
-	set_bit(TCCR1B, WGM13);
+	set_bit(TCCR1B, WGM13); // Timer/Counter 1 Control Register B
 	set_bit(TCCR1B, WGM12);
-	set_bit(TCCR1A, WGM11);
+	set_bit(TCCR1A, WGM11); // Timer/Counter 1 Control Register A
 	clear_bit(TCCR1A, WGM10);
 	
-	//Set compare output on PB6 (OC1B)
+	//Clear OC1B on compare match, set OC1B at BOTTOM (non-inverting mode)
 	set_bit(TCCR1A, COM1B1);
 	clear_bit(TCCR1A, COM1B0);
 	pwm_timer_freq = (uint32_t)clock_freq/prescaler;
 	PWM_set_period(period);
 	
 
-	// Set PB6 to output mode
+	// Set PB6/OC1B to output mode
 	set_bit(DDRB, PB6);
 }
 
@@ -44,7 +44,6 @@ void PWM_set_period(float period){
 void PWM_pulse_set(float width) {
 	
 	uint16_t pulse = pwm_timer_freq*width-0.5;
-	//printf("Width: %d \t Pulse: %d \n",width, pulse);
 	
 	OCR1B = pulse;
 }

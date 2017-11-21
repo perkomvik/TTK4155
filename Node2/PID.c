@@ -101,22 +101,12 @@ void PID(uint8_t pos_ref){
 	}
 }
 void PID_init(void){
+
+	cli(); // Disable global interrupts
+
+	TIMSK2=(1<<TOIE2); // enable timer overflow interrupt for Timer2
 	
-	//-------------INITIALIZE TIMER INPUT-----------------
+	TCCR2B = (1<<CS20) | (1<<CS21) | (1<<CS22); // start timer2 with /1024 prescaler
 	
-	// Disable global interrupts
-	cli();
-	
-	// enable timer overflow interrupt for Timer2
-	TIMSK2=(1<<TOIE2);
-	
-	// start timer2 with /1024 prescaler
-	
-	TCCR2B = (1<<CS20) | (1<<CS21) | (1<<CS22);
-	
-	// Enable global interrupts
-	sei();
-	
-	//---------------------------------------------------
-	
+	sei(); // Enable global interrupts
 }
